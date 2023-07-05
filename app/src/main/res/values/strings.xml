@@ -6,5 +6,6 @@
     <!-- Games Fragment -->
     <string name="games">Games</string>
     <string name="wishlist">Wishlist</string>
+    <string name="game_name">Game Name</string>
 
 </resources>

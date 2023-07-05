@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/gamesFragment"
-        android:name="com.asimodabas.trendyol_interview.ui.activity.fragment.games.GamesFragment"
+        android:name="com.asimodabas.trendyol_interview.ui.fragment.games.GamesFragment"
         android:label="fragment_games"
         tools:layout="@layout/fragment_games" >
         <action
@@ -16,12 +16,15 @@
     </fragment>
     <fragment
         android:id="@+id/gamesDetailFragment"
-        android:name="com.asimodabas.trendyol_interview.ui.activity.fragment.games_detail.GamesDetailFragment"
+        android:name="com.asimodabas.trendyol_interview.ui.fragment.games_detail.GamesDetailFragment"
         android:label="fragment_games_detail"
-        tools:layout="@layout/fragment_games_detail" />
+        tools:layout="@layout/fragment_games_detail" >
+        <argument android:name="detailArgs"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/wishlistFragment"
-        android:name="com.asimodabas.trendyol_interview.ui.activity.fragment.wishlist.WishlistFragment"
+        android:name="com.asimodabas.trendyol_interview.ui.fragment.wishlist.WishlistFragment"
         android:label="fragment_wishlist"
         tools:layout="@layout/fragment_wishlist" >
         <action
