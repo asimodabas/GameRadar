@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/gamesFragment">
+
+    <fragment
+        android:id="@+id/gamesFragment"
+        android:name="com.asimodabas.trendyol_interview.ui.activity.fragment.games.GamesFragment"
+        android:label="fragment_games"
+        tools:layout="@layout/fragment_games" >
+        <action
+            android:id="@+id/action_gamesFragment_to_gamesDetailFragment"
+            app:destination="@id/gamesDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gamesDetailFragment"
+        android:name="com.asimodabas.trendyol_interview.ui.activity.fragment.games_detail.GamesDetailFragment"
+        android:label="fragment_games_detail"
+        tools:layout="@layout/fragment_games_detail" />
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.asimodabas.trendyol_interview.ui.activity.fragment.wishlist.WishlistFragment"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist" >
+        <action
+            android:id="@+id/action_wishlistFragment_to_gamesDetailFragment"
+            app:destination="@id/gamesDetailFragment" />
+    </fragment>
+</navigation>

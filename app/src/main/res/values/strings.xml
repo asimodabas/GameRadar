@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Trendyol-Interview</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Games Fragment -->
+    <string name="games">Games</string>
+    <string name="wishlist">Wishlist</string>
+
 </resources>
