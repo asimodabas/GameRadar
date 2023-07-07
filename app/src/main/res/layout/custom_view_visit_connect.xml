@@ -9,7 +9,7 @@
     tools:ignore="MissingDefaultResource">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/redditLink"
+        android:id="@+id/visitConnectLink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -22,10 +22,10 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tvVisitConnect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="@string/visit_reddit"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
