@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Trendyol-Interview</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Games Fragment -->
+    <string name="games">Games</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="game_name">Game Name</string>
+    <string name="search">Search</string>
+
+    <!-- Games Detail Fragment -->
+    <string name="descriptions">Descriptions</string>
+    <string name="informations">Informations</string>
+    <string name="release_date">Release Date</string>
+    <string name="genres">Genres</string>
+    <string name="play_time">Play Time</string>
+    <string name="publishers">Publishers</string>
+    <string name="visit_reddit">Visit Reddit</string>
+    <string name="visit_website">Visit Website</string>
+    <string name="game_detail">Game Detail</string>
+    <string name="back">Back</string>
+
 </resources>
