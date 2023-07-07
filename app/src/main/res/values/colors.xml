@@ -5,4 +5,7 @@
     <color name="dark_gray">#2C2B2B</color>
     <color name="light_gray">#575656</color>
     <color name="gray">#757474</color>
+    <color name="red">#D70040</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="green">#00FF00</color>
 </resources>
