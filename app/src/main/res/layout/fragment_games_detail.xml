@@ -101,25 +101,25 @@
 
         </LinearLayout>
 
-        <com.asimodabas.trendyol_interview.ui.fragment.view.DescriptionsView
+        <com.asimodabas.trendyol_interview.ui.view.DescriptionsView
             android:id="@+id/customViewDescriptions"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/dark_gray" />
 
-        <com.asimodabas.trendyol_interview.ui.fragment.view.InformationsView
+        <com.asimodabas.trendyol_interview.ui.view.InformationsView
             android:id="@+id/customViewInformations"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/dark_gray" />
 
-        <com.asimodabas.trendyol_interview.ui.fragment.view.VisitConnectView
+        <com.asimodabas.trendyol_interview.ui.view.VisitConnectView
             android:id="@+id/customViewVisitReddit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="@color/dark_gray" />
 
-        <com.asimodabas.trendyol_interview.ui.fragment.view.VisitConnectView
+        <com.asimodabas.trendyol_interview.ui.view.VisitConnectView
             android:id="@+id/customViewVisitWebsite"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
