@@ -32,17 +32,21 @@ fun formatMetaCritic(metaCritic: Int?): Pair<Int, Int> {
     var backgroundResource = 0
     var textColor = 0
 
-    if (metaCritic in 1..49) {
-        backgroundResource = R.drawable.bg_red_mc
-        textColor = R.color.red
-    }
-    if (metaCritic in 50..75) {
-        backgroundResource = R.drawable.bg_yellow_mc
-        textColor = R.color.yellow
-    }
-    if (metaCritic in 75..101) {
-        backgroundResource = R.drawable.bg_green_mc
-        textColor = R.color.green
+    when (metaCritic) {
+        in 1..49 -> {
+            backgroundResource = R.drawable.bg_red_mc
+            textColor = R.color.red
+        }
+
+        in 50..75 -> {
+            backgroundResource = R.drawable.bg_yellow_mc
+            textColor = R.color.yellow
+        }
+
+        in 75..101 -> {
+            backgroundResource = R.drawable.bg_green_mc
+            textColor = R.color.green
+        }
     }
 
     return backgroundResource to textColor

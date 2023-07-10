@@ -10,9 +10,9 @@ data class Detail(
     @SerializedName("playtime") val playtime: String?,
     @SerializedName("description") val description: String?,
     @SerializedName("reddit_url") val reddit_url: String?,
-    @SerializedName("publisher") val publisher: String?,
     @SerializedName("website") val website: String?,
-    @SerializedName("genres") val genres: List<Genre>,
+    @SerializedName("genres") val genres: List<Genre>?,
+    @SerializedName("publishers") val publishers: List<Publisher>?,
     @SerializedName("metacritic") val metacritic: Int?,
     @ColumnInfo(name = "wishlist") @SerializedName("wishlist") var wishlist: Boolean = false,
     @ColumnInfo(name = "background_image") @SerializedName("background_image") val imageUrl: String?

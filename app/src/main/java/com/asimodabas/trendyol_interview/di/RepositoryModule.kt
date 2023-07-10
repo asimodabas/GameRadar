@@ -18,13 +18,13 @@ abstract class RepositoryModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun provideGamesRepository(gameRepositoryImpl: GameRepositoryImpl): GameRepository
+    abstract fun bindGamesRepository(gameRepositoryImpl: GameRepositoryImpl): GameRepository
 
     @Binds
     @ViewModelScoped
-    abstract fun provideRoomRepository(roomRepositoryImpl: RoomRepositoryImpl): RoomRepository
+    abstract fun bindRoomRepository(roomRepositoryImpl: RoomRepositoryImpl): RoomRepository
 
     @Binds
     @ViewModelScoped
-    abstract fun provideGameDetailRepository(gameDetailRepositoryImpl: GameDetailRepositoryImpl): GameDetailRepository
+    abstract fun bindGameDetailRepository(gameDetailRepositoryImpl: GameDetailRepositoryImpl): GameDetailRepository
 }
