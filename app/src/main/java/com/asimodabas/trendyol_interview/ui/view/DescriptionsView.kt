@@ -1,4 +1,4 @@
-package com.asimodabas.trendyol_interview.ui.fragment.view
+package com.asimodabas.trendyol_interview.ui.view
 
 import android.content.Context
 import android.util.AttributeSet
