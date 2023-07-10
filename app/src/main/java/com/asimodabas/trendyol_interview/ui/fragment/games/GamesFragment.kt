@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.asimodabas.trendyol_interview.R
+import com.asimodabas.trendyol_interview.common.Constants.GAMES_RV_GRID_COUNT
 import com.asimodabas.trendyol_interview.common.viewBinding
 import com.asimodabas.trendyol_interview.databinding.FragmentGamesBinding
 import com.asimodabas.trendyol_interview.ui.fragment.games.adapter.GamesRecyclerAdapter
@@ -32,13 +33,13 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
     private fun searchQuery() {
         binding.searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
+            override fun onQueryTextSubmit(searchQuery: String?): Boolean {
                 binding.gamesRV.visibility = View.GONE
-                viewModel.getSearchGames(p0.orEmpty())
+                viewModel.getSearchGames(searchQuery.orEmpty())
                 return true
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
+            override fun onQueryTextChange(searchQuery: String?): Boolean {
                 return true
             }
         })
@@ -49,7 +50,7 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
             with(binding) {
                 state.success?.let { response ->
                     setupRv()
-                    response.results.let { gamesRecyclerAdapter.submitList(it) }
+                    response.let { gamesRecyclerAdapter.submitList(it) }
                     gamesRV.isVisible = true
                 }
 
@@ -64,7 +65,7 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
         binding.gamesRV.apply {
             gamesRecyclerAdapter = GamesRecyclerAdapter(findNavController())
             adapter = gamesRecyclerAdapter
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(context, GAMES_RV_GRID_COUNT)
             setHasFixedSize(true)
             clipToPadding = false
         }

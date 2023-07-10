@@ -8,20 +8,20 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.asimodabas.trendyol_interview.common.getGlide
 import com.asimodabas.trendyol_interview.databinding.LayoutMainRowBinding
-import com.asimodabas.trendyol_interview.domain.model.Detail
+import com.asimodabas.trendyol_interview.domain.model.ui_model.GameUiModel
 import com.asimodabas.trendyol_interview.ui.fragment.games.GamesFragmentDirections
 
 class GamesRecyclerAdapter(
     private val navController: NavController
 ) :
-    ListAdapter<Detail, GamesRecyclerAdapter.GameViewHolder>(DiffCallback) {
+    ListAdapter<GameUiModel, GamesRecyclerAdapter.GameViewHolder>(DiffCallback) {
 
     class GameViewHolder(
         private val binding: LayoutMainRowBinding,
         private val navController: NavController
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(detail: Detail) {
+        fun bind(detail: GameUiModel) {
             with(binding) {
                 tvGameTitle.text = detail.name
                 getGlide(root.context, detail.imageUrl.toString(), ivGameImage)
@@ -36,26 +36,28 @@ class GamesRecyclerAdapter(
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Detail>() {
-        override fun areItemsTheSame(oldItem: Detail, newItem: Detail): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<GameUiModel>() {
+        override fun areItemsTheSame(oldItem: GameUiModel, newItem: GameUiModel): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Detail, newItem: Detail): Boolean {
-
+        override fun areContentsTheSame(oldItem: GameUiModel, newItem: GameUiModel): Boolean {
             return oldItem == newItem
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         return GameViewHolder(
-            LayoutMainRowBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            navController
+            binding = LayoutMainRowBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            ),
+            navController = navController
         )
     }
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
-        val currentList = currentList[position]
-        holder.bind(currentList)
+        holder.bind(currentList[position])
     }
 }

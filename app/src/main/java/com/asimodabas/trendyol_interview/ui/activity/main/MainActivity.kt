@@ -22,7 +22,5 @@ class MainActivity : AppCompatActivity() {
 
         navController = Navigation.findNavController(this, R.id.fContainerFlow)
         setupWithNavController(binding.bottomNavigationView, navController)
-
-        //2a70524831ad4231b1e7e0af05915bcd
     }
 }
