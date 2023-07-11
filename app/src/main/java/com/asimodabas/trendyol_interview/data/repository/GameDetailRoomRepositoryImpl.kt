@@ -2,14 +2,14 @@ package com.asimodabas.trendyol_interview.data.repository
 
 import com.asimodabas.trendyol_interview.data.room.GameDAO
 import com.asimodabas.trendyol_interview.domain.model.DetailLocal
-import com.asimodabas.trendyol_interview.domain.repository.RoomRepository
+import com.asimodabas.trendyol_interview.domain.repository.GameDetailRoomRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class RoomRepositoryImpl @Inject constructor(
+class GameDetailRoomRepositoryImpl @Inject constructor(
     private val dao: GameDAO
-) : RoomRepository {
+) : GameDetailRoomRepository {
     override suspend fun getDetails() = withContext(Dispatchers.IO) {
         dao.getDetail()
     }

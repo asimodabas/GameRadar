@@ -6,7 +6,7 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.asimodabas.trendyol_interview.common.getGlide
+import com.asimodabas.trendyol_interview.common.getImage
 import com.asimodabas.trendyol_interview.databinding.LayoutMainRowBinding
 import com.asimodabas.trendyol_interview.domain.model.ui_model.GameUiModel
 import com.asimodabas.trendyol_interview.ui.fragment.games.GamesFragmentDirections
@@ -24,7 +24,7 @@ class GamesRecyclerAdapter(
         fun bind(detail: GameUiModel) {
             with(binding) {
                 tvGameTitle.text = detail.name
-                getGlide(root.context, detail.imageUrl.toString(), ivGameImage)
+                getImage(root.context, detail.imageUrl.toString(), ivGameImage)
                 root.setOnClickListener {
                     navController.navigate(
                         GamesFragmentDirections.actionGamesFragmentToGamesDetailFragment(

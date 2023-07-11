@@ -1,6 +1,5 @@
 package com.asimodabas.trendyol_interview.ui.fragment.games_detail
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Html
 import android.view.View
@@ -11,19 +10,19 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.asimodabas.trendyol_interview.R
-import com.asimodabas.trendyol_interview.common.formatMetaCritic
-import com.asimodabas.trendyol_interview.common.getGlide
+import com.asimodabas.trendyol_interview.common.getDetailText
+import com.asimodabas.trendyol_interview.common.getGenreFormat
+import com.asimodabas.trendyol_interview.common.getImage
+import com.asimodabas.trendyol_interview.common.getPublisherFormat
 import com.asimodabas.trendyol_interview.common.getUrl
 import com.asimodabas.trendyol_interview.common.makeCollapsible
+import com.asimodabas.trendyol_interview.common.metacriticFormat
 import com.asimodabas.trendyol_interview.common.viewBinding
+import com.asimodabas.trendyol_interview.common.wishlistResource
 import com.asimodabas.trendyol_interview.databinding.FragmentGamesDetailBinding
 import com.asimodabas.trendyol_interview.domain.model.Detail
-import com.asimodabas.trendyol_interview.domain.model.DetailLocal
 import com.asimodabas.trendyol_interview.ui.view.VisitConnectView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GamesDetailFragment : Fragment(R.layout.fragment_games_detail) {
@@ -40,65 +39,35 @@ class GamesDetailFragment : Fragment(R.layout.fragment_games_detail) {
     }
 
     private fun observeDetailData() = with(binding) {
-        viewModel.detailState.observe(viewLifecycleOwner) { state ->
-            state.success?.let { detail ->
-                buttonBack.setOnClickListener {
-                    findNavController().navigate(GamesDetailFragmentDirections.actionGamesDetailFragmentToGamesFragment())
-                }
-                val sharedPref =
-                    requireContext().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-
-                if (sharedPref.getBoolean(detail.name, false)) {
-                    ivAddWishList.setImageResource(R.drawable.ic_wishlist_select)
-                    detail.wishlist = true
-                } else {
-                    ivAddWishList.setImageResource(R.drawable.ic_wishlist)
-                    detail.wishlist = false
+        with(viewModel) {
+            detailState.observe(viewLifecycleOwner) { state ->
+                state.success?.let { detail ->
+                    buttonBack.setOnClickListener {
+                        findNavController().navigate(GamesDetailFragmentDirections.actionGamesDetailFragmentToGamesFragment())
+                    }
+                    ivAddWishList.setOnClickListener {
+                        wishlistClickButton(detail)
+                    }
+                    checkWishlist(detail)
+                    getGamesDetailData(detail)
                 }
 
-                getGlide(requireContext(), detail.imageUrl.toString(), ivImageInfo)
-                getGamesDetailData(detail)
-                wishlistClickButton(viewModel.detailToDetailLocal(detail))
+                state.error?.let {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                }
             }
 
-            state.error?.let {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun wishlistClickButton(detail: DetailLocal) = with(binding) {
-        ivAddWishList.setOnClickListener {
-            if (detail.wishlist) {
-                detail.wishlist = false
-                ivAddWishList.setImageResource(R.drawable.ic_wishlist)
-
-                CoroutineScope(Dispatchers.IO).launch {
-                    viewModel.deleteWishList(detail)
-
-                    val sharedPref =
-                        requireContext().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-                    sharedPref.edit().remove(detail.name).apply()
-                }
-            } else {
-                detail.wishlist = true
-                ivAddWishList.setImageResource(R.drawable.ic_wishlist_select)
-
-                CoroutineScope(Dispatchers.IO).launch {
-                    viewModel.addWishList(detail)
-
-                    val sharedPref =
-                        requireContext().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-                    sharedPref.edit().putBoolean(detail.name, true).apply()
-                }
+            wishlistState.observe(viewLifecycleOwner) { state ->
+                wishlistResource(state, ivAddWishList)
             }
         }
     }
 
     private fun getGamesDetailData(detail: Detail) = with(binding) {
-        checkMetacritic(detail)
+        metacriticFormat(detail, tvMetaCritic)
         getDescriptionBind(detail)
         getInformationBind(detail)
+        getImage(requireContext(), detail.imageUrl.toString(), ivImageInfo)
         getConnectBind(
             detail.reddit_url.toString(),
             customViewVisitReddit,
@@ -124,30 +93,10 @@ class GamesDetailFragment : Fragment(R.layout.fragment_games_detail) {
     private fun getInformationBind(detail: Detail) = with(binding) {
         customViewInformations.binding.apply {
             tvName.text = detail.name
+            tvGenres.text = getGenreFormat(detail, tvGenres, tvGenresInfo)
+            tvPublishers.text = getPublisherFormat(detail, tvPublishers, tvPublishersInfo)
             getDetailText(detail.released, tvReleaseDate, tvReleaseDateInfo)
             getDetailText(detail.playtime, tvPlayTime, tvPlayTimeInfo)
-
-            if (detail.genres != null) {
-                var allGenres = ""
-                detail.genres.forEach { item ->
-                    allGenres += " ${item.name}, "
-                }
-                tvGenres.text = allGenres.dropLast(2)
-            } else {
-                tvGenresInfo.visibility = View.GONE
-                tvGenres.visibility = View.GONE
-            }
-
-            if (detail.publishers != null) {
-                var allPublishers = ""
-                detail.publishers.forEach { item ->
-                    allPublishers += " ${item.name}, "
-                }
-                tvPublishers.text = allPublishers.dropLast(2)
-            } else {
-                tvPublishersInfo.visibility = View.GONE
-                tvPublishers.visibility = View.GONE
-            }
         }
     }
 
@@ -160,36 +109,7 @@ class GamesDetailFragment : Fragment(R.layout.fragment_games_detail) {
         customView.binding.apply {
             textView.text = getString(setString)
             customView.setOnClickListener {
-                detail.let { url -> startActivity(getUrl(url)) }
-            }
-        }
-    }
-
-    private fun getDetailText(detail: String?, textView: TextView, textViewInfo: TextView) {
-        if (detail != null) {
-            textView.text = detail
-        } else {
-            textViewInfo.visibility = View.GONE
-            textView.visibility = View.GONE
-        }
-    }
-
-    private fun checkMetacritic(detail: Detail) = with(binding) {
-        detail.metacritic.let { metaCritic ->
-            with(tvMetaCritic) {
-                if (metaCritic == null) {
-                    visibility = View.GONE
-                } else {
-                    visibility = View.VISIBLE
-                    text = metaCritic.toString()
-                    setBackgroundResource(formatMetaCritic(metaCritic).first)
-                    setTextColor(
-                        androidx.core.content.ContextCompat.getColor(
-                            context,
-                            formatMetaCritic(metaCritic).second
-                        )
-                    )
-                }
+                startActivity(getUrl(detail))
             }
         }
     }
