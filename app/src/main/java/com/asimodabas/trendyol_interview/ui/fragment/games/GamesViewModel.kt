@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GamesViewModel @Inject constructor(
     private val getAllGamesUseCase: GetAllGamesUseCase,
-    private val GetGameSearchUseCase: GetGameSearchUseCase
+    private val GetGameSearchUseCase: GetGameSearchUseCase,
 ) : ViewModel() {
 
     private val _gameState = MutableLiveData<GameState>()

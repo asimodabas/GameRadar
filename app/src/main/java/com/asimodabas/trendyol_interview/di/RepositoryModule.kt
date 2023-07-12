@@ -2,10 +2,10 @@ package com.asimodabas.trendyol_interview.di
 
 import com.asimodabas.trendyol_interview.data.repository.GameDetailRepositoryImpl
 import com.asimodabas.trendyol_interview.data.repository.GameRepositoryImpl
-import com.asimodabas.trendyol_interview.data.repository.RoomRepositoryImpl
+import com.asimodabas.trendyol_interview.data.repository.GameDetailRoomRepositoryImpl
 import com.asimodabas.trendyol_interview.domain.repository.GameDetailRepository
 import com.asimodabas.trendyol_interview.domain.repository.GameRepository
-import com.asimodabas.trendyol_interview.domain.repository.RoomRepository
+import com.asimodabas.trendyol_interview.domain.repository.GameDetailRoomRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,7 +22,7 @@ abstract class RepositoryModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindRoomRepository(roomRepositoryImpl: RoomRepositoryImpl): RoomRepository
+    abstract fun bindRoomRepository(roomRepositoryImpl: GameDetailRoomRepositoryImpl): GameDetailRoomRepository
 
     @Binds
     @ViewModelScoped

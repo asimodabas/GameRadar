@@ -5,14 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import android.transition.TransitionManager
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import com.asimodabas.trendyol_interview.R
-import com.asimodabas.trendyol_interview.domain.model.Detail
 import com.bumptech.glide.Glide
 
 fun TextView.makeCollapsible(
@@ -31,25 +28,14 @@ fun TextView.makeCollapsible(
     }
 }
 
-fun metacriticFormat(
-    detail: Detail,
-    metariticTextView: TextView
+fun getUrl(url: String) = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+
+fun getImage(
+    context: Context,
+    imageUrl: String,
+    imageView: ImageView
 ) {
-    with(metariticTextView) {
-        if (detail.metacritic == null) {
-            visibility = View.GONE
-        } else {
-            visibility = View.VISIBLE
-            text = detail.metacritic.toString()
-            setBackgroundResource(formatMetaCritic(detail.metacritic).first)
-            setTextColor(
-                ContextCompat.getColor(
-                    context,
-                    formatMetaCritic(detail.metacritic).second
-                )
-            )
-        }
-    }
+    Glide.with(context).load(imageUrl).into(imageView)
 }
 
 fun formatMetaCritic(metaCritic: Int?): Pair<Int, Int> {
@@ -74,74 +60,6 @@ fun formatMetaCritic(metaCritic: Int?): Pair<Int, Int> {
     }
 
     return backgroundResource to textColor
-}
-
-fun getUrl(url: String) = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-
-fun wishlistResource(
-    state: Boolean,
-    ivAddWishList: ImageView
-) {
-    if (state) {
-        ivAddWishList.setImageResource(R.drawable.ic_wishlist_select)
-    } else {
-        ivAddWishList.setImageResource(R.drawable.ic_wishlist)
-    }
-}
-
-fun getImage(
-    context: Context,
-    imageUrl: String,
-    imageView: ImageView
-) {
-    Glide.with(context).load(imageUrl).into(imageView)
-}
-
-fun getDetailText(
-    detail: String?,
-    textView: TextView,
-    textViewInfo: TextView
-) {
-    if (detail != null) {
-        textView.text = detail
-    } else {
-        textViewInfo.visibility = View.GONE
-        textView.visibility = View.GONE
-    }
-}
-
-fun getPublisherFormat(
-    detail: Detail,
-    tvPublishers: TextView,
-    tvPublishersInfo: TextView
-): String {
-    var allPublishers = ""
-    if (detail.publishers != null) {
-        detail.publishers.forEach { item ->
-            allPublishers += " ${item.name}, "
-        }
-    } else {
-        tvPublishersInfo.visibility = View.GONE
-        tvPublishers.visibility = View.GONE
-    }
-    return allPublishers.dropLast(2)
-}
-
-fun getGenreFormat(
-    detail: Detail,
-    tvGenres: TextView,
-    tvGenresInfo: TextView
-): String {
-    var allGenres = ""
-    if (detail.genres != null) {
-        detail.genres.forEach { item ->
-            allGenres += " ${item.name}, "
-        }
-    } else {
-        tvGenresInfo.visibility = View.GONE
-        tvGenres.visibility = View.GONE
-    }
-    return allGenres.dropLast(2)
 }
 
 fun <T : ViewBinding> ViewGroup.inflate(

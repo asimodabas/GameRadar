@@ -10,15 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.asimodabas.trendyol_interview.R
-import com.asimodabas.trendyol_interview.common.getDetailText
-import com.asimodabas.trendyol_interview.common.getGenreFormat
 import com.asimodabas.trendyol_interview.common.getImage
-import com.asimodabas.trendyol_interview.common.getPublisherFormat
 import com.asimodabas.trendyol_interview.common.getUrl
 import com.asimodabas.trendyol_interview.common.makeCollapsible
-import com.asimodabas.trendyol_interview.common.metacriticFormat
 import com.asimodabas.trendyol_interview.common.viewBinding
-import com.asimodabas.trendyol_interview.common.wishlistResource
 import com.asimodabas.trendyol_interview.databinding.FragmentGamesDetailBinding
 import com.asimodabas.trendyol_interview.domain.model.Detail
 import com.asimodabas.trendyol_interview.ui.view.VisitConnectView
@@ -42,14 +37,15 @@ class GamesDetailFragment : Fragment(R.layout.fragment_games_detail) {
         with(viewModel) {
             detailState.observe(viewLifecycleOwner) { state ->
                 state.success?.let { detail ->
+                    gamesStatusData(detail)
+                    getGamesDetailData(detail)
+
                     buttonBack.setOnClickListener {
                         findNavController().navigate(GamesDetailFragmentDirections.actionGamesDetailFragmentToGamesFragment())
                     }
                     ivAddWishList.setOnClickListener {
                         wishlistClickButton(detail)
                     }
-                    checkWishlist(detail)
-                    getGamesDetailData(detail)
                 }
 
                 state.error?.let {
@@ -63,11 +59,19 @@ class GamesDetailFragment : Fragment(R.layout.fragment_games_detail) {
         }
     }
 
+    private fun gamesStatusData(detail: Detail) = with(viewModel) {
+        checkWishlist(detail)
+        getPlaytimeText(detail)
+        getReleasedText(detail)
+        getPublisherText(detail)
+        getGenreText(detail)
+        getMetacriticText(detail)
+    }
+
     private fun getGamesDetailData(detail: Detail) = with(binding) {
-        metacriticFormat(detail, tvMetaCritic)
+        getImage(requireContext(), detail.imageUrl.toString(), ivImageInfo)
         getDescriptionBind(detail)
         getInformationBind(detail)
-        getImage(requireContext(), detail.imageUrl.toString(), ivImageInfo)
         getConnectBind(
             detail.reddit_url.toString(),
             customViewVisitReddit,
@@ -82,21 +86,26 @@ class GamesDetailFragment : Fragment(R.layout.fragment_games_detail) {
         )
     }
 
+    private fun getInformationBind(detail: Detail) = with(binding) {
+        with(viewModel) {
+            customViewInformations.binding.apply {
+                tvName.text = detail.name
+                checkState.observe(viewLifecycleOwner) { state ->
+                    tvPublishers.text = getPublisherFormat(state.isTextPublisher, detail, tvPublishers, tvPublishersInfo)
+                    tvPublishers.text = getGenreFormat(state.isTextGenres, detail, tvGenres, tvGenresInfo)
+                    metacriticFormat(state.isTextMetacritic, detail, tvMetaCritic)
+                    getDetailTextFormat(state.isTextPlaytime, detail.playtime, tvPlayTime, tvPlayTimeInfo)
+                    getDetailTextFormat(state.isTextReleased, detail.released, tvReleaseDate, tvReleaseDateInfo)
+                }
+            }
+        }
+    }
+
     private fun getDescriptionBind(detail: Detail) = with(binding) {
         customViewDescriptions.binding.apply {
             tvDescription.makeCollapsible(4, Int.MAX_VALUE)
             tvDescription.text =
                 Html.fromHtml(detail.description, Html.FROM_HTML_MODE_LEGACY).toString()
-        }
-    }
-
-    private fun getInformationBind(detail: Detail) = with(binding) {
-        customViewInformations.binding.apply {
-            tvName.text = detail.name
-            tvGenres.text = getGenreFormat(detail, tvGenres, tvGenresInfo)
-            tvPublishers.text = getPublisherFormat(detail, tvPublishers, tvPublishersInfo)
-            getDetailText(detail.released, tvReleaseDate, tvReleaseDateInfo)
-            getDetailText(detail.playtime, tvPlayTime, tvPlayTimeInfo)
         }
     }
 
