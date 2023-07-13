@@ -1,6 +1,5 @@
 package com.asimodabas.trendyol_interview.common
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.transition.TransitionManager
@@ -28,14 +27,23 @@ fun TextView.makeCollapsible(
     }
 }
 
+fun ImageView.loadUrl(imageUrl: String) =
+    Glide.with(context)
+        .load(imageUrl)
+        .centerCrop()
+        .into(this)
+
 fun getUrl(url: String) = Intent(Intent.ACTION_VIEW, Uri.parse(url))
 
-fun getImage(
-    context: Context,
-    imageUrl: String,
-    imageView: ImageView
+fun wishlistResource(
+    state: Boolean,
+    ivAddWishList: ImageView
 ) {
-    Glide.with(context).load(imageUrl).into(imageView)
+    if (state) {
+        ivAddWishList.setImageResource(R.drawable.ic_wishlist_select)
+    } else {
+        ivAddWishList.setImageResource(R.drawable.ic_wishlist)
+    }
 }
 
 fun formatMetaCritic(metaCritic: Int?): Pair<Int, Int> {

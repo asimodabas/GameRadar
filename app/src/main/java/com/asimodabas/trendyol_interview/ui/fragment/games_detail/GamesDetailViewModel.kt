@@ -36,9 +36,11 @@ class GamesDetailViewModel @Inject constructor(
         when (val request = getGameDetailUseCase.invoke(id)) {
             is NetworkCheck.Success -> {
                 _gamesDetailState.postValue(
-                    GamesDetailState(
-                        data = request.data!!
-                    )
+                    request.data?.let { data ->
+                        GamesDetailState(
+                            data = data
+                        )
+                    }
                 )
             }
 

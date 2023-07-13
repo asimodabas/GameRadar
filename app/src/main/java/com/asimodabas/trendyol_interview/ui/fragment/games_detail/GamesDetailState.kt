@@ -11,14 +11,6 @@ data class GamesDetailState(
     var data: Detail
 ) {
 
-    fun getDescriptionTextView(): String {
-        return if (data.description.isNullOrEmpty()) {
-            ""
-        } else {
-            Html.fromHtml(data.description, Html.FROM_HTML_MODE_LEGACY).toString()
-        }
-    }
-
     fun publisherIsVisible(): Int {
         return if (data.publishers.isNullOrEmpty()) {
             View.GONE
@@ -91,13 +83,13 @@ data class GamesDetailState(
         }
     }
 
-    fun getPublisherTextView(): String = data.publishers?.joinToString(separator = ", ") { it.name.toString() } ?: ""
-
-    fun getGenreTextView(): String = data.genres?.joinToString(separator = ", ") { it.name.toString() } ?: ""
-
-    fun getWebsiteTextView(context: Context): String = context.getString(R.string.visit_website)
-
-    fun getRedditTextView(context: Context): String = context.getString(R.string.visit_reddit)
+    fun getDescriptionTextView(): String {
+        return if (data.description.isNullOrEmpty()) {
+            ""
+        } else {
+            Html.fromHtml(data.description, Html.FROM_HTML_MODE_LEGACY).toString()
+        }
+    }
 
     fun getPlaytimeTextView(): String? = data.playtime
 
@@ -107,7 +99,15 @@ data class GamesDetailState(
 
     fun getReleasedTextView(): String? = data.released
 
-    fun getMetacriticTextViewColor(context: Context): Int = context.getColor(formatMetaCritic(data.metacritic).second)
+    fun getWebsiteTextView(context: Context): String = context.getString(R.string.visit_website)
+
+    fun getRedditTextView(context: Context): String = context.getString(R.string.visit_reddit)
 
     fun getMetacriticTextViewBackground(): Int = formatMetaCritic(data.metacritic).first
+
+    fun getMetacriticTextViewColor(context: Context): Int = context.getColor(formatMetaCritic(data.metacritic).second)
+
+    fun getPublisherTextView(): String = data.publishers?.joinToString(separator = ", ") { it.name.toString() } ?: ""
+
+    fun getGenreTextView(): String = data.genres?.joinToString(separator = ", ") { it.name.toString() } ?: ""
 }
