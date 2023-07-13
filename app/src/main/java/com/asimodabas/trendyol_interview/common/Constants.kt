@@ -10,4 +10,6 @@ object Constants {
 
     const val GAMES_RV_GRID_COUNT = 2
     const val GAMES_DB_NAME = "gamedb"
+
+    const val DESCRIPTION_MAX_COUNT = 4
 }

@@ -1,92 +1,55 @@
 package com.asimodabas.trendyol_interview.ui.fragment.games_detail
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.ContextCompat
-import com.asimodabas.trendyol_interview.R
-import com.asimodabas.trendyol_interview.common.formatMetaCritic
-import com.asimodabas.trendyol_interview.domain.model.Detail
+import com.asimodabas.trendyol_interview.common.Constants.DESCRIPTION_MAX_COUNT
+import com.asimodabas.trendyol_interview.common.loadUrl
+import com.asimodabas.trendyol_interview.common.makeCollapsible
+import com.asimodabas.trendyol_interview.databinding.FragmentGamesDetailBinding
 
-fun wishlistResource(
-    state: Boolean,
-    ivAddWishList: ImageView
+fun FragmentGamesDetailBinding.bind(
+    state: GamesDetailState,
 ) {
-    if (state) {
-        ivAddWishList.setImageResource(R.drawable.ic_wishlist_select)
-    } else {
-        ivAddWishList.setImageResource(R.drawable.ic_wishlist)
-    }
-}
 
-fun getDetailTextFormat(
-    state: Boolean,
-    detail: String?,
-    textView: TextView,
-    textViewInfo: TextView
-) {
-    if (state) {
-        textView.text = detail
-    } else {
-        textViewInfo.visibility = View.GONE
-        textView.visibility = View.GONE
-    }
-}
+    tvName.text = state.getGameNameTextView()
+    tvName.visibility = state.getGameNameIsVisible()
 
-fun getPublisherFormat(
-    state: Boolean,
-    detail: Detail,
-    tvPublishers: TextView,
-    tvPublishersInfo: TextView
-): String {
-    var allPublishers = ""
-    if (state) {
-        detail.publishers?.forEach { item ->
-            allPublishers += " ${item.name}, "
-        }
-    } else {
-        tvPublishersInfo.visibility = View.GONE
-        tvPublishers.visibility = View.GONE
-    }
-    return allPublishers.dropLast(2)
-}
+    tvMetaCritic.text = state.getMetacriticTextView()
+    tvMetaCritic.visibility = state.getMetacriticIsVisible()
+    tvMetaCritic.setTextColor(state.getMetacriticTextViewColor(root.context))
+    tvMetaCritic.setBackgroundResource(state.getMetacriticTextViewBackground())
 
-fun getGenreFormat(
-    state: Boolean,
-    detail: Detail,
-    tvPublishers: TextView,
-    tvPublishersInfo: TextView
-): String {
-    var allGenres = ""
-    if (state) {
-        detail.genres?.forEach { item ->
-            allGenres += " ${item.name}, "
-        }
-    } else {
-        tvPublishersInfo.visibility = View.GONE
-        tvPublishers.visibility = View.GONE
-    }
-    return allGenres.dropLast(2)
-}
+    ivImageInfo.loadUrl(state.data.imageUrl.toString())
 
-fun metacriticFormat(
-    state: Boolean,
-    detail: Detail,
-    metariticTextView: TextView
-) {
-    with(metariticTextView) {
-        if (state) {
-            visibility = View.VISIBLE
-            text = detail.metacritic.toString()
-            setBackgroundResource(formatMetaCritic(detail.metacritic).first)
-            setTextColor(
-                ContextCompat.getColor(
-                    context,
-                    formatMetaCritic(detail.metacritic).second
-                )
-            )
-        } else {
-            visibility = View.GONE
-        }
+    customViewDescriptions.binding.apply {
+        tvDescription.makeCollapsible(DESCRIPTION_MAX_COUNT, Int.MAX_VALUE)
+        tvDescription.text = state.getDescriptionTextView()
+        tvDescription.visibility = state.getDescriptionIsVisible()
+    }
+
+    customViewVisitWebsite.binding.apply {
+        tvVisitConnect.text = state.getWebsiteTextView(root.context)
+        tvVisitConnect.visibility = state.getWebsiteIsVisible()
+    }
+
+    customViewVisitReddit.binding.apply {
+        tvVisitConnect.text = state.getRedditTextView(root.context)
+        tvVisitConnect.visibility = state.getRedditIsVisible()
+    }
+
+    customViewInformations.binding.apply {
+        tvPublishers.text = state.getPublisherTextView()
+        tvPublishers.visibility = state.publisherIsVisible()
+        tvPublishersInfo.visibility = state.publisherIsVisible()
+
+        tvGenres.text = state.getGenreTextView()
+        tvGenres.visibility = state.genreIsVisible()
+        tvGenresInfo.visibility = state.genreIsVisible()
+
+        tvPlayTime.text = state.getPlaytimeTextView()
+        tvPlayTime.visibility = state.getPlaytimeIsVisible()
+        tvPlayTimeInfo.visibility = state.getPlaytimeIsVisible()
+
+        tvReleaseDate.text = state.getReleasedTextView()
+        tvReleaseDate.visibility = state.getReleasedIsVisible()
+        tvReleaseDateInfo.visibility = state.getReleasedIsVisible()
     }
 }

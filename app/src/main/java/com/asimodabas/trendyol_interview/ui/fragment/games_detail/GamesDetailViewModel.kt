@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.asimodabas.trendyol_interview.common.NetworkCheck
 import com.asimodabas.trendyol_interview.common.state.DetailState
 import com.asimodabas.trendyol_interview.domain.mapper.detail_local.DetailLocalMapper
-import com.asimodabas.trendyol_interview.common.state.CheckState
 import com.asimodabas.trendyol_interview.domain.model.Detail
 import com.asimodabas.trendyol_interview.domain.model.DetailLocal
 import com.asimodabas.trendyol_interview.domain.usecase.delete_detail.DeleteDetailUseCase
@@ -27,21 +26,18 @@ class GamesDetailViewModel @Inject constructor(
     private var sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
-    private val _detailState = MutableLiveData<DetailState>()
-    val detailState: LiveData<DetailState> = _detailState
+    private val _gamesDetailState = MutableLiveData<GamesDetailState?>()
+    val gamesDetailState: LiveData<GamesDetailState?> = _gamesDetailState
 
     private val _wishlistState = MutableLiveData<Boolean>()
     val wishlistState: LiveData<Boolean> = _wishlistState
 
-    private val _checkState = MutableLiveData<CheckState>()
-    val checkState: LiveData<CheckState> = _checkState
-
     fun getDetail(id: Int) = viewModelScope.launch {
         when (val request = getGameDetailUseCase.invoke(id)) {
             is NetworkCheck.Success -> {
-                _detailState.postValue(
-                    DetailState(
-                        success = request.data
+                _gamesDetailState.postValue(
+                    GamesDetailState(
+                        data = request.data!!
                     )
                 )
             }
@@ -54,61 +50,13 @@ class GamesDetailViewModel @Inject constructor(
 
     fun checkWishlist(detail: Detail) = viewModelScope.launch {
         if (sharedPreferences.getBoolean(detail.name, false)) {
+
             _wishlistState.postValue(true)
             detail.wishlist = true
         } else {
+
             _wishlistState.postValue(false)
             detail.wishlist = false
-        }
-    }
-
-    fun getMetacriticText(
-        detail: Detail,
-    ) = viewModelScope.launch {
-        if (detail.metacritic != null) {
-            _checkState.postValue(getCheckStateOrCreate().copy(isTextMetacritic = true))
-        } else {
-            _checkState.postValue(getCheckStateOrCreate().copy(isTextMetacritic = false))
-        }
-    }
-
-    fun getPublisherText(
-        detail: Detail,
-    ) = viewModelScope.launch {
-        if (detail.publishers != null) {
-            _checkState.postValue(getCheckStateOrCreate().copy(isTextPublisher = true))
-        } else {
-            _checkState.postValue(getCheckStateOrCreate().copy(isTextPublisher = false))
-        }
-    }
-
-    fun getGenreText(
-        detail: Detail,
-    ) = viewModelScope.launch {
-        if (detail.publishers != null) {
-            _checkState.postValue(getCheckStateOrCreate().copy(isTextGenres = true))
-        } else {
-            _checkState.postValue(getCheckStateOrCreate().copy(isTextGenres = false))
-        }
-    }
-
-    fun getPlaytimeText(
-        detail: Detail
-    ) = viewModelScope.launch {
-        if (detail.playtime != null) {
-            _checkState.postValue(getCheckStateOrCreate().copy(isTextPlaytime = true))
-        } else {
-            _checkState.postValue(getCheckStateOrCreate().copy(isTextPlaytime = false))
-        }
-    }
-
-    fun getReleasedText(
-        detail: Detail
-    ) = viewModelScope.launch {
-        if (detail.released != null) {
-            _checkState.postValue(getCheckStateOrCreate().copy(isTextReleased = true))
-        } else {
-            _checkState.postValue(getCheckStateOrCreate().copy(isTextReleased = false))
         }
     }
 
@@ -127,8 +75,6 @@ class GamesDetailViewModel @Inject constructor(
             sharedPreferences.edit().putBoolean(detailLocal.name, true).apply()
         }
     }
-
-    private fun getCheckStateOrCreate() = (_checkState.value ?: CheckState())
 
     private fun addWishList(detail: DetailLocal) = viewModelScope.launch {
         insertDetailsUseCase.invoke(detail)
