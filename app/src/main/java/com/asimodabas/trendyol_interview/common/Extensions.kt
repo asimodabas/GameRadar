@@ -1,6 +1,5 @@
 package com.asimodabas.trendyol_interview.common
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.transition.TransitionManager
@@ -28,6 +27,25 @@ fun TextView.makeCollapsible(
     }
 }
 
+fun ImageView.loadUrl(imageUrl: String) =
+    Glide.with(context)
+        .load(imageUrl)
+        .centerCrop()
+        .into(this)
+
+fun getUrl(url: String) = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+
+fun wishlistResource(
+    state: Boolean,
+    ivAddWishList: ImageView
+) {
+    if (state) {
+        ivAddWishList.setImageResource(R.drawable.ic_wishlist_select)
+    } else {
+        ivAddWishList.setImageResource(R.drawable.ic_wishlist)
+    }
+}
+
 fun formatMetaCritic(metaCritic: Int?): Pair<Int, Int> {
     var backgroundResource = 0
     var textColor = 0
@@ -50,12 +68,6 @@ fun formatMetaCritic(metaCritic: Int?): Pair<Int, Int> {
     }
 
     return backgroundResource to textColor
-}
-
-fun getUrl(url: String) = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-
-fun getGlide(context: Context, imageUrl: String, imageView: ImageView) {
-    Glide.with(context).load(imageUrl).into(imageView)
 }
 
 fun <T : ViewBinding> ViewGroup.inflate(
