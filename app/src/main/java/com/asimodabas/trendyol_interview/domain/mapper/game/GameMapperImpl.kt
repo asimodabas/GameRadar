@@ -8,7 +8,9 @@ class GameMapperImpl @Inject constructor() : GameMapper {
     override fun map(input: GameDTO): List<GameUiModel> =
         input.results.map {
             GameUiModel(
-                it.id, it.name, it.imageUrl
+                id = it.id,
+                name = it.name,
+                imageUrl = it.imageUrl
             )
         }
 }

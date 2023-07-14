@@ -6,15 +6,15 @@ import javax.inject.Inject
 
 class DetailLocalMapperImpl @Inject constructor() : DetailLocalMapper {
     override fun map(input: Detail): DetailLocal = DetailLocal(
-        input.id,
-        input.name,
-        input.released,
-        input.playtime,
-        input.description,
-        input.reddit_url,
-        input.website,
-        input.metacritic,
-        input.wishlist,
-        input.imageUrl
+        id = input.id,
+        name = input.name,
+        released = input.released,
+        playtime = input.playtime,
+        description = input.description,
+        reddit_url = input.reddit_url,
+        website = input.website,
+        metacritic = input.metacritic,
+        wishlist = input.wishlist,
+        background_image = input.imageUrl
     )
 }
