@@ -17,6 +17,6 @@ class DetailMapperImpl @Inject constructor() : DetailMapper {
         emptyList(),
         input.metacritic,
         input.wishlist,
-        input.imageUrl
+        input.background_image
     )
 }

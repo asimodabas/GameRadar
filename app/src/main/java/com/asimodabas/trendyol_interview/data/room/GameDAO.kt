@@ -2,6 +2,7 @@ package com.asimodabas.trendyol_interview.data.room
 
 import androidx.room.*
 import com.asimodabas.trendyol_interview.domain.model.DetailLocal
+import com.asimodabas.trendyol_interview.domain.model.ui_model.WishlistUiModel
 
 @Dao
 interface GameDAO {
@@ -13,5 +14,5 @@ interface GameDAO {
     fun delete(gameDetail: DetailLocal)
 
     @Query("SELECT * FROM games")
-    suspend fun getDetail(): List<DetailLocal>
+    suspend fun getDetail(): List<WishlistUiModel>
 }

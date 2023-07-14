@@ -15,6 +15,6 @@ class DetailLocalMapperImpl @Inject constructor() : DetailLocalMapper {
         input.website,
         input.metacritic,
         input.wishlist,
-        input.imageUrl
+        input.background_image
     )
 }

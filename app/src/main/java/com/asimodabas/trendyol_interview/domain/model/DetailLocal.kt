@@ -14,5 +14,5 @@ data class DetailLocal(
     val website: String?,
     val metacritic: Int?,
     var wishlist: Boolean = false,
-    val imageUrl: String?
+    val background_image: String?
 )
