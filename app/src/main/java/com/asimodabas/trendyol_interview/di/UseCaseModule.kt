@@ -10,6 +10,8 @@ import com.asimodabas.trendyol_interview.domain.usecase.get_game_detail.GetGameD
 import com.asimodabas.trendyol_interview.domain.usecase.get_game_detail.GetGameDetailUseCaseImpl
 import com.asimodabas.trendyol_interview.domain.usecase.get_game_search.GetGameSearchUseCase
 import com.asimodabas.trendyol_interview.domain.usecase.get_game_search.GetGameSearchUseCaseImpl
+import com.asimodabas.trendyol_interview.domain.usecase.get_platforms.GetPlatformsUseCase
+import com.asimodabas.trendyol_interview.domain.usecase.get_platforms.GetPlatformsUseCaseImpl
 import com.asimodabas.trendyol_interview.domain.usecase.insert_details.InsertDetailsUseCase
 import com.asimodabas.trendyol_interview.domain.usecase.insert_details.InsertDetailsUseCaseImpl
 import dagger.Binds
@@ -45,4 +47,8 @@ abstract class UseCaseModule {
     @Binds
     @ViewModelScoped
     abstract fun bindGetGameDetailUseCase(getGameDetailUseCaseImpl: GetGameDetailUseCaseImpl): GetGameDetailUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindGetPlatformsUseCase(getPlatformsUseCaseImpl: GetPlatformsUseCaseImpl): GetPlatformsUseCase
 }

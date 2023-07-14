@@ -13,14 +13,11 @@ import com.asimodabas.trendyol_interview.ui.fragment.games.GamesFragmentDirectio
 
 class GamesRecyclerAdapter(
     private val navController: NavController
-) :
-    ListAdapter<GameUiModel, GamesRecyclerAdapter.GameViewHolder>(DiffCallback) {
+) : ListAdapter<GameUiModel, GamesRecyclerAdapter.GameViewHolder>(DiffCallback) {
 
     class GameViewHolder(
-        private val binding: LayoutMainRowBinding,
-        private val navController: NavController
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+        private val binding: LayoutMainRowBinding, private val navController: NavController
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(detail: GameUiModel) {
             with(binding) {
                 tvGameTitle.text = detail.name
@@ -49,11 +46,8 @@ class GamesRecyclerAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         return GameViewHolder(
             binding = LayoutMainRowBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            ),
-            navController = navController
+                LayoutInflater.from(parent.context), parent, false
+            ), navController = navController
         )
     }
 
