@@ -19,9 +19,9 @@ class WishlistViewModel @Inject constructor(
     val wishlistState: LiveData<WishlistState> = _wishlistState
 
     fun getWishlist() = viewModelScope.launch {
-        val request = getDetailsUseCase.invoke()
+        val detailsList = getDetailsUseCase.invoke()
         _wishlistState.postValue(
-            WishlistState(success = request)
+            WishlistState(success = detailsList)
         )
     }
 }

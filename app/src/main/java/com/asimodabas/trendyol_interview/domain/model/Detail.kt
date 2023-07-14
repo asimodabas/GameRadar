@@ -1,6 +1,5 @@
 package com.asimodabas.trendyol_interview.domain.model
 
-import androidx.room.ColumnInfo
 import com.google.gson.annotations.SerializedName
 
 data class Detail(
@@ -14,6 +13,6 @@ data class Detail(
     @SerializedName("genres") val genres: List<Genre>?,
     @SerializedName("publishers") val publishers: List<Publisher>?,
     @SerializedName("metacritic") val metacritic: Int?,
-    @ColumnInfo(name = "wishlist") @SerializedName("wishlist") var wishlist: Boolean = false,
-    @ColumnInfo(name = "background_image") @SerializedName("background_image") val background_image: String?
+    @SerializedName("background_image") val imageUrl: String?,
+    @SerializedName("wishlist") var wishlist: Boolean = false
 )
