@@ -18,37 +18,29 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
 @InstallIn(ViewModelComponent::class)
 abstract class UseCaseModule {
 
     @Binds
-    @ViewModelScoped
     abstract fun bindGetAllGamesUseCase(getAllGamesUseCaseImpl: GetAllGamesUseCaseImpl): GetAllGamesUseCase
 
     @Binds
-    @ViewModelScoped
     abstract fun bindGetGameSearchUseCase(getGameSearchUseCaseImpl: GetGameSearchUseCaseImpl): GetGameSearchUseCase
 
     @Binds
-    @ViewModelScoped
     abstract fun bindGetDetailUseCase(getDetailsUseCaseImpl: GetDetailsUseCaseImpl): GetDetailsUseCase
 
     @Binds
-    @ViewModelScoped
     abstract fun bindInsertDetailUseCase(insertDetailsUseCaseImpl: InsertDetailsUseCaseImpl): InsertDetailsUseCase
 
     @Binds
-    @ViewModelScoped
     abstract fun bindDeleteDetailUseCase(deleteDetailUseCaseImpl: DeleteDetailUseCaseImpl): DeleteDetailUseCase
 
     @Binds
-    @ViewModelScoped
     abstract fun bindGetGameDetailUseCase(getGameDetailUseCaseImpl: GetGameDetailUseCaseImpl): GetGameDetailUseCase
 
     @Binds
-    @ViewModelScoped
     abstract fun bindGetPlatformsUseCase(getPlatformsUseCaseImpl: GetPlatformsUseCaseImpl): GetPlatformsUseCase
 }

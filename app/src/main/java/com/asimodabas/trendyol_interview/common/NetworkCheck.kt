@@ -16,9 +16,7 @@ sealed class NetworkCheck<T>(
     )
 }
 
-suspend fun <T> safeApiRequest(
-    apiRequest: suspend () -> T
-): NetworkCheck<T> {
+suspend fun <T> safeApiRequest(apiRequest: suspend () -> T): NetworkCheck<T> {
     return withContext(Dispatchers.IO) {
         try {
             NetworkCheck.Success(apiRequest.invoke())

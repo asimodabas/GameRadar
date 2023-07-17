@@ -7,7 +7,6 @@ import com.asimodabas.trendyol_interview.common.Constants.API_PLATFORMS
 import com.asimodabas.trendyol_interview.data.dto.GameDTO
 import com.asimodabas.trendyol_interview.data.dto.PlatformDTO
 import com.asimodabas.trendyol_interview.domain.model.Detail
-import com.asimodabas.trendyol_interview.domain.model.Platform
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
