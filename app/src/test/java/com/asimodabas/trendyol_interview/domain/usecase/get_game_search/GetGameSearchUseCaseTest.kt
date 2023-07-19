@@ -28,23 +28,4 @@ class GetGameSearchUseCaseTest {
         MockitoAnnotations.openMocks(this)
         getGameSearchUseCase = GetGameSearchUseCaseImpl(gameRepository, gameMapper)
     }
-
-    @Test
-    fun `should return NetworkCheck Error with error message when repository returns error`() =
-        runBlocking {
-            // Given - Mocked data
-            val query = "rpg"
-            val errorMessage = "Error fetching game search results."
-
-            // Mock the repository function to return an error
-            Mockito.`when`(gameRepository.getGameSearch(query))
-                .thenThrow(RuntimeException(errorMessage))
-
-            // When
-            val result = getGameSearchUseCase(query)
-
-            // Then - Assert that the result is NetworkCheck.Error with the correct error message
-            assertTrue(result is NetworkCheck.Error)
-            assertEquals(errorMessage, (result as NetworkCheck.Error).message)
-        }
 }

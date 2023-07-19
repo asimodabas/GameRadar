@@ -30,7 +30,7 @@ class GetPlatformsUseCaseTest {
     }
 
     @Test
-    fun `should return NetworkCheck Error when repository throws an exception`() = runBlocking {
+    fun `given the repository throwing an exception, when the use case is called, then it should return a NetworkCheck Error`() = runBlocking {
         // Given - Mocked error message
         val errorMessage = "Error fetching platforms."
 

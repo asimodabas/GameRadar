@@ -1,7 +1,7 @@
 package com.asimodabas.trendyol_interview.domain.usecase.get_game_detail
 
 import com.asimodabas.trendyol_interview.common.NetworkCheck
-import com.asimodabas.trendyol_interview.common.createDetailShow
+import com.asimodabas.trendyol_interview.common.firstDetailShow
 import com.asimodabas.trendyol_interview.domain.repository.GameDetailRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -26,10 +26,10 @@ class GetGameDetailUseCaseTest {
     }
 
     @Test
-    fun `should return NetworkCheck Success with Detail data`() = runBlocking {
+    fun `given NetworkCheck when request succeeds then Success is triggered`() = runBlocking {
         // Given - Mocked data
         val mockedId = 1
-        val mockedDetail = createDetailShow()
+        val mockedDetail = firstDetailShow()
 
         // Mock the repository function to return the mocked data
         Mockito.`when`(gameDetailRepository.getGameDetail(mockedId))

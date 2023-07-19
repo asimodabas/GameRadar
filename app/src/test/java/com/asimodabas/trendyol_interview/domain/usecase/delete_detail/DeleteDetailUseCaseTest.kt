@@ -24,7 +24,7 @@ class DeleteDetailUseCaseTest {
     }
 
     @Test
-    fun `when invoke is called with a detail, it should call deleteDetail in repository`() =
+    fun `given deleteDetail operation when deleteDetail in use case is called then verify repository method is called`() =
         runBlocking {
             // Given
             val detail = topDetailLocal

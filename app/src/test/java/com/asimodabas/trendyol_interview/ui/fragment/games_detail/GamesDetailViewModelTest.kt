@@ -3,7 +3,7 @@ package com.asimodabas.trendyol_interview.ui.fragment.games_detail
 import android.content.SharedPreferences
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.asimodabas.trendyol_interview.common.NetworkCheck
-import com.asimodabas.trendyol_interview.common.createDetailShow
+import com.asimodabas.trendyol_interview.common.firstDetailShow
 import com.asimodabas.trendyol_interview.common.observedValue
 import com.asimodabas.trendyol_interview.common.topDetailLocal
 import com.asimodabas.trendyol_interview.domain.mapper.detail_local.DetailLocalMapper
@@ -78,7 +78,7 @@ class GamesDetailViewModelTest {
     fun testGetDetailSuccess() = runTest {
         // Mock data and response
         val id = 123
-        val detail = createDetailShow()
+        val detail = firstDetailShow()
         val response = NetworkCheck.Success(detail)
 
         // Set up the mock behavior for the use case
@@ -96,7 +96,7 @@ class GamesDetailViewModelTest {
     @Test
     fun testCheckWishlistTrue() = runTest {
         // Mock data and response
-        val detail = createDetailShow()
+        val detail = firstDetailShow()
 
         // Mock behavior for sharedPreferences
         `when`(sharedPreferences.getBoolean(anyString(), anyBoolean())).thenReturn(true)
@@ -113,7 +113,7 @@ class GamesDetailViewModelTest {
     @Test
     fun testCheckWishlistFalse() = runTest {
         // Mock data and response
-        val detail = createDetailShow()
+        val detail = firstDetailShow()
 
         // Mock behavior for sharedPreferences
         `when`(
@@ -134,7 +134,7 @@ class GamesDetailViewModelTest {
     @Test
     fun testCheckWishlist() = runTest {
         // Mock data and response
-        val detail = createDetailShow()
+        val detail = firstDetailShow()
 
         // Mock behavior for sharedPreferences
         `when`(sharedPreferences.getBoolean(anyString(), anyBoolean())).thenReturn(true)
@@ -151,7 +151,7 @@ class GamesDetailViewModelTest {
     @Test
     fun testWishlistClickButton() = runTest {
         // Mock data and response
-        val detail = createDetailShow()
+        val detail = firstDetailShow()
         val detailLocal = topDetailLocal // Mock DetailLocal instance
 
         // Mock behavior for sharedPreferences

@@ -1,51 +1,70 @@
 package com.asimodabas.trendyol_interview.domain.usecase.get_all_games
 
 import com.asimodabas.trendyol_interview.common.NetworkCheck
-import com.asimodabas.trendyol_interview.common.assertNetworkCheckEquals
+import com.asimodabas.trendyol_interview.common.mergeGameUiModel
 import com.asimodabas.trendyol_interview.common.topGameDTO
-import com.asimodabas.trendyol_interview.common.topGameUiModelList
 import com.asimodabas.trendyol_interview.domain.mapper.game.GameMapper
 import com.asimodabas.trendyol_interview.domain.repository.GameRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
+@ExperimentalCoroutinesApi
 class GetAllGamesUseCaseTest {
 
     private lateinit var getAllGamesUseCase: GetAllGamesUseCase
 
     @Mock
-    private lateinit var gameRepository: GameRepository
+    private lateinit var mockGameRepository: GameRepository
 
     @Mock
-    private lateinit var gameMapper: GameMapper
+    private lateinit var mockGameMapper: GameMapper
 
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
-        getAllGamesUseCase = GetAllGamesUseCaseImpl(gameRepository, gameMapper)
+        getAllGamesUseCase = GetAllGamesUseCaseImpl(mockGameRepository, mockGameMapper)
     }
 
     @Test
-    fun `should return NetworkCheck Success with a list of GameUiModel`() = runBlocking {
-        // Given
-        val gameEntities = topGameDTO
-        val gameUiModels = topGameUiModelList
+    fun `given GetAllGamesUseCase when getAllGamesUseCase is called then it should return NetworkCheck Success with GameUiModel list`() {
+        runBlocking {
+            // Create mock data
+            val mockGameList = topGameDTO
+            val mockGameUiList = mergeGameUiModel
 
-        // Mock repository response
-        Mockito.`when`(gameRepository.getAllGames()).thenReturn(gameEntities)
+            // Define the behavior of the mock GameRepository
+            `when`(mockGameRepository.getAllGames("1")).thenReturn(mockGameList)
 
-        // Mock mapper response
-        Mockito.`when`(gameMapper.map(gameEntities)).thenReturn(gameUiModels)
+            // Define the behavior of the mock GameMapper
+            `when`(mockGameMapper.map(mockGameList)).thenReturn(mockGameUiList)
 
-        // When
-        val result = getAllGamesUseCase()
+            // Call the Use Case
+            val result = getAllGamesUseCase("1")
 
-        // Then
-        val expected = NetworkCheck.Success(gameUiModels)
-        assertNetworkCheckEquals(expected, result)
+            // Check the result
+            assert(result is NetworkCheck.Success)
+            assertEquals(mockGameUiList, (result as NetworkCheck.Success).data)
+        }
+    }
+
+    @Test
+    fun `given GetAllGamesUseCase, when getAllGamesUseCase throws an exception then it should return NetworkCheck Error`() {
+        runBlocking {
+            // Define the behavior of the mock GameRepository and throw an exception
+            `when`(mockGameRepository.getAllGames("1")).thenThrow(RuntimeException("Network Error"))
+
+            // Call the Use Case
+            val result = getAllGamesUseCase("1")
+
+            // Check the result
+            assert(result is NetworkCheck.Error)
+            assertEquals("Network Error", (result as NetworkCheck.Error).message)
+        }
     }
 }

@@ -23,7 +23,7 @@ class InsertDetailsUseCaseTest {
     }
 
     @Test
-    fun `should insert detail to repository`() = runBlocking {
+    fun `given a repository, when the insertDetail function is called with a detail then the detail should be inserted into the repository`() = runBlocking {
         // Given - Mocked data
         val detail = topDetailLocal
 

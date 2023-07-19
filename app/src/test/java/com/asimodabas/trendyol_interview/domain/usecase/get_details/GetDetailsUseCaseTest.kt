@@ -25,7 +25,7 @@ class GetDetailsUseCaseTest {
     }
 
     @Test
-    fun `should return list of WishlistUiModel`() = runBlocking {
+    fun `given WishlistUseCase, when WishlistUseCase is called then it should return WishlistUiModel list`() = runBlocking {
         // Mock the repository function to return the mocked data
         Mockito.`when`(gameDetailRoomRepository.getDetails()).thenReturn(mergeWishlistUiModel)
 
@@ -37,7 +37,7 @@ class GetDetailsUseCaseTest {
     }
 
     @Test
-    fun `should return empty list when repository returns empty list`() = runBlocking {
+    fun `given an empty list returned from the repository when the use case is called, then it should return an empty list`() = runBlocking {
         // Given - Mocked data
         val emptyList = emptyList<WishlistUiModel>()
 

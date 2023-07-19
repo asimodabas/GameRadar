@@ -11,19 +11,37 @@ import com.asimodabas.trendyol_interview.domain.model.ui_model.PlatformUiModel
 import com.asimodabas.trendyol_interview.domain.model.ui_model.WishlistUiModel
 
 @VisibleForTesting
-fun createDetailShow(): Detail {
+fun firstDetailShow(): Detail {
     return Detail(
         id = 1,
-        name = "testName",
-        released = "testReleased",
-        playtime = "testPlaytime",
-        description = "testDescription",
-        reddit_url = "testReddit",
-        website = "testWebsite",
+        name = "firstTestName",
+        released = "firstTestReleased",
+        playtime = "firstTestPlaytime",
+        description = "firstTestDescription",
+        reddit_url = "firstTestReddit",
+        website = "firstTestWebsite",
         genres = topGenresList,
         publishers = topPublisherList,
         metacritic = 1,
-        imageUrl = "testImage",
+        imageUrl = "firstTestImage",
+        wishlist = true
+    )
+}
+
+@VisibleForTesting
+fun secondDetailShow(): Detail {
+    return Detail(
+        id = 2,
+        name = "secondTestName",
+        released = "secondTestReleased",
+        playtime = "secondTestPlaytime",
+        description = "secondTestDescription",
+        reddit_url = "secondTestReddit",
+        website = "secondTestWebsite",
+        genres = topGenresList,
+        publishers = topPublisherList,
+        metacritic = 2,
+        imageUrl = "secondTestImage",
         wishlist = true
     )
 }
@@ -44,27 +62,30 @@ val topDetailLocal = DetailLocal(
 
 @VisibleForTesting
 val topPublisher = Publisher(
-    id = 1, name = "testName", slug = "testSlug", gamesCount = 1, imageBackground = "testBackground"
+    id = 1, name = "testName",
+    slug = "testSlug",
+    gamesCount = 1,
+    imageBackground = "testBackground"
 )
 
 @VisibleForTesting
 val topGenres = Genre(
-    id = 1, name = "testName", slug = "testSlug", gamesCount = 1, imageBackground = "testBackground"
-)
-
-@VisibleForTesting
-val topGameUiModel = GameUiModel(
-    id = 1, name = "testName", imageUrl = "testImage"
+    id = 1, name = "testName",
+    slug = "testSlug",
+    gamesCount = 1,
+    imageBackground = "testBackground"
 )
 
 @VisibleForTesting
 val firstPlatformUiModel = PlatformUiModel(
-    id = 1, name = "firstTestName", slug = "firstTestSlug"
+    id = 1, name = "firstTestName",
+    slug = "firstTestSlug"
 )
 
 @VisibleForTesting
 val secondPlatformUiModel = PlatformUiModel(
-    id = 2, name = "secondTestName", slug = "secondTestSlug"
+    id = 2, name = "secondTestName",
+    slug = "secondTestSlug"
 )
 
 @VisibleForTesting
@@ -88,13 +109,25 @@ val secondWishlistUiModel = WishlistUiModel(
 )
 
 @VisibleForTesting
+val firstGameUiModel = GameUiModel(
+    id = 1,
+    name = "firstTestName",
+    imageUrl = "firstTestImage"
+)
+
+@VisibleForTesting
+val secondGameUiModel = GameUiModel(
+    id = 2, name = "secondTestName", imageUrl = "secondTestImage"
+)
+
+@VisibleForTesting
 val topPublisherList = listOf(topPublisher)
 
 @VisibleForTesting
 val topGenresList = listOf(topGenres)
 
 @VisibleForTesting
-val topGameUiModelList = listOf(topGameUiModel)
+val mergeGameUiModel = listOf(firstGameUiModel, secondGameUiModel)
 
 @VisibleForTesting
 val mergeWishlistUiModel = listOf(firstWishlistUiModel, secondWishlistUiModel)
@@ -103,7 +136,7 @@ val mergeWishlistUiModel = listOf(firstWishlistUiModel, secondWishlistUiModel)
 val mergePlatformUiModel = listOf(firstPlatformUiModel, secondPlatformUiModel)
 
 @VisibleForTesting
-val topDetailList = listOf(createDetailShow())
+val topDetailList = listOf(firstDetailShow())
 
 @VisibleForTesting
 val topGameDTO = GameDTO(topDetailList)
