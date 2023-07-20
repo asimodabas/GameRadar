@@ -75,97 +75,102 @@ class GamesDetailViewModelTest {
     }
 
     @Test
-    fun testGetDetailSuccess() = runTest {
-        // Mock data and response
-        val id = 123
-        val detail = firstDetailShow()
-        val response = NetworkCheck.Success(detail)
+    fun `Given a database with available details for a specific item when the GetDetail function is called with the item ID then verify that the details are retrieved success`() =
+        runTest {
+            // Mock data and response
+            val id = 123
+            val detail = firstDetailShow()
+            val response = NetworkCheck.Success(detail)
 
-        // Set up the mock behavior for the use case
-        `when`(getGameDetailUseCase.invoke(id)).thenReturn(response)
+            // Set up the mock behavior for the use case
+            `when`(getGameDetailUseCase.invoke(id)).thenReturn(response)
 
-        // Call the function to be tested
-        viewModel.getDetail(id)
+            // Call the function to be tested
+            viewModel.getDetail(id)
 
-        // Wait until LiveData is updated
-        val expectedResult = GamesDetailState(data = detail)
-        val result = viewModel.gamesDetailState.observedValue()
-        assertEquals(expectedResult, result)
-    }
-
-    @Test
-    fun testCheckWishlistTrue() = runTest {
-        // Mock data and response
-        val detail = firstDetailShow()
-
-        // Mock behavior for sharedPreferences
-        `when`(sharedPreferences.getBoolean(anyString(), anyBoolean())).thenReturn(true)
-
-        // Call the function to be tested
-        viewModel.checkWishlist(detail)
-
-        // Wait until LiveData is updated
-        val expectedResult = true
-        val result = viewModel.wishlistState.observedValue()
-        assertEquals(expectedResult, result)
-    }
+            // Wait until LiveData is updated
+            val expectedResult = GamesDetailState(data = detail)
+            val result = viewModel.gamesDetailState.observedValue()
+            assertEquals(expectedResult, result)
+        }
 
     @Test
-    fun testCheckWishlistFalse() = runTest {
-        // Mock data and response
-        val detail = firstDetailShow()
+    fun `Given a user with a wishlist containing the specified item when the CheckWishlist function is called for that item,then ensure that it returns true, indicating that the item is in the wishlist`() =
+        runTest {
+            // Mock data and response
+            val detail = firstDetailShow()
 
-        // Mock behavior for sharedPreferences
-        `when`(
-            sharedPreferences.getBoolean(
-                anyString(), anyBoolean()
-            )
-        ).thenReturn(false) // Different from testCheckWishlistTrue
+            // Mock behavior for sharedPreferences
+            `when`(sharedPreferences.getBoolean(anyString(), anyBoolean())).thenReturn(true)
 
-        // Call the function to be tested
-        viewModel.checkWishlist(detail)
+            // Call the function to be tested
+            viewModel.checkWishlist(detail)
 
-        // Wait until LiveData is updated
-        val expectedResult = false // Different from testCheckWishlistTrue
-        val result = viewModel.wishlistState.observedValue()
-        assertEquals(expectedResult, result)
-    }
+            // Wait until LiveData is updated
+            val expectedResult = true
+            val result = viewModel.wishlistState.observedValue()
+            assertEquals(expectedResult, result)
+        }
 
     @Test
-    fun testCheckWishlist() = runTest {
-        // Mock data and response
-        val detail = firstDetailShow()
+    fun `Given a user without the specified item in their wishlist, when the CheckWishlist function is called for that item, then ensure that it returns false, indicating that the item is not in the wishlist`() =
+        runTest {
+            // Mock data and response
+            val detail = firstDetailShow()
 
-        // Mock behavior for sharedPreferences
-        `when`(sharedPreferences.getBoolean(anyString(), anyBoolean())).thenReturn(true)
+            // Mock behavior for sharedPreferences
+            `when`(
+                sharedPreferences.getBoolean(
+                    anyString(), anyBoolean()
+                )
+            ).thenReturn(false) // Different from testCheckWishlistTrue
 
-        // Call the function to be tested
-        viewModel.checkWishlist(detail)
+            // Call the function to be tested
+            viewModel.checkWishlist(detail)
 
-        // Wait until LiveData is updated
-        val expectedResult = true
-        val result = viewModel.wishlistState.observedValue()
-        assertEquals(expectedResult, result)
-    }
+            // Wait until LiveData is updated
+            val expectedResult = false // Different from testCheckWishlistTrue
+            val result = viewModel.wishlistState.observedValue()
+            assertEquals(expectedResult, result)
+        }
 
     @Test
-    fun testWishlistClickButton() = runTest {
-        // Mock data and response
-        val detail = firstDetailShow()
-        val detailLocal = topDetailLocal // Mock DetailLocal instance
+    fun `given a user with a wishlist containing multiple items, when the CheckWishlist function is called for each item, then verify the presence of each item in the wishlist by expecting true if the item is present and false if the item is not present`() =
+        runTest {
+            // Mock data and response
+            val detail = firstDetailShow()
 
-        // Mock behavior for sharedPreferences
-        `when`(sharedPreferences.getBoolean(anyString(), anyBoolean())).thenReturn(true)
+            // Mock behavior for sharedPreferences
+            `when`(sharedPreferences.getBoolean(anyString(), anyBoolean())).thenReturn(true)
 
-        // Mock behavior for detailLocalMapper
-        `when`(detailLocalMapper.map(detail)).thenReturn(detailLocal)
+            // Call the function to be tested
+            viewModel.checkWishlist(detail)
 
-        // Call the function to be tested
-        viewModel.wishlistClickButton(detail)
+            // Wait until LiveData is updated
+            val expectedResult = true
+            val result = viewModel.wishlistState.observedValue()
+            assertEquals(expectedResult, result)
+        }
 
-        // Wait until LiveData is updated
-        val expectedResult = false
-        val result = viewModel.wishlistState.observedValue()
-        assertEquals(expectedResult, result)
-    }
+    @Test
+    fun `given a user on the wishlist page, when they click the wishlist button for an item, then verify that the item is added to the cart success`() =
+        runTest {
+            // Mock data and response
+            val detail = firstDetailShow()
+            val detailLocal = topDetailLocal
+
+            // Mock behavior for sharedPreferences
+            `when`(sharedPreferences.getBoolean(anyString(), anyBoolean())).thenReturn(true)
+
+            // Mock behavior for detailLocalMapper
+            `when`(detailLocalMapper.map(detail)).thenReturn(detailLocal)
+
+            // Call the function to be tested
+            viewModel.wishlistClickButton(detail)
+
+            // Wait until LiveData is updated
+            val expectedResult = false
+            val result = viewModel.wishlistState.observedValue()
+            assertEquals(expectedResult, result)
+        }
 }

@@ -167,8 +167,8 @@ class GamesDetailStateTest {
         val state1 = GamesDetailState(data1)
         val state2 = GamesDetailState(data2)
 
-        val expectedBackground1 = formatMetaCritic(data1.metacritic).first
-        val expectedBackground2 = formatMetaCritic(data2.metacritic).first
+        val expectedBackground1 = formatMetaCritic(data1.metacritic)?.first
+        val expectedBackground2 = formatMetaCritic(data2.metacritic)?.first
 
         assertEquals(expectedBackground1, state1.getMetacriticTextViewBackground())
         assertEquals(expectedBackground2, state2.getMetacriticTextViewBackground())

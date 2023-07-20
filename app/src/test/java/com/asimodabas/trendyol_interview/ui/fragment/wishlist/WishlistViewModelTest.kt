@@ -50,18 +50,19 @@ class WishlistViewModelTest {
     }
 
     @Test
-    fun testGetWishlistSuccess() = runTest {
-        val wishlistItems = mergeWishlistUiModel
+    fun `given a user with a wishlist containing multiple items, when the GetWishlist function is called, then ensure that all items in the wishlist are retrieved success`() =
+        runTest {
+            val wishlistItems = mergeWishlistUiModel
 
-        // Set up the mock behavior for the use case
-        `when`(getDetailsUseCase.invoke()).thenReturn(wishlistItems)
+            // Set up the mock behavior for the use case
+            `when`(getDetailsUseCase.invoke()).thenReturn(wishlistItems)
 
-        // Call the function to be tested
-        viewModel.getWishlist()
+            // Call the function to be tested
+            viewModel.getWishlist()
 
-        // Wait until LiveData is updated
-        val expectedResult = WishlistState(success = wishlistItems)
-        val result = viewModel.wishlistState.observedValue()
-        assertEquals(expectedResult, result)
-    }
+            // Wait until LiveData is updated
+            val expectedResult = WishlistState(success = wishlistItems)
+            val result = viewModel.wishlistState.observedValue()
+            assertEquals(expectedResult, result)
+        }
 }

@@ -69,39 +69,44 @@ class GamesViewModelTest {
     }
 
     @Test
-    fun testGetPlatformsSuccess() = runTest {
-        // Mock data and response
-        val platformList = mergePlatformUiModel
-        val response = NetworkCheck.Success(platformList)
+    fun `given a database with available platforms when the GetPlatforms function is called then verify that the platforms are retrieved success`() =
+        runTest {
+            // Mock data and response
+            val platformList = mergePlatformUiModel
+            val response = NetworkCheck.Success(platformList)
 
-        // Set up the mock behavior for the use case
-        `when`(getPlatformsUseCase.invoke()).thenReturn(response)
+            // Set up the mock behavior for the use case
+            `when`(getPlatformsUseCase.invoke()).thenReturn(response)
 
-        // Call the function to be tested
-        viewModel.getPlatforms()
+            // Call the function to be tested
+            viewModel.getPlatforms()
 
-        // Wait until LiveData is updated
-        val expectedResult = PlatformState(success = platformList)
-        val result = viewModel.platformsState.observedValue()
-        assertEquals(expectedResult, result)
-    }
+            // Wait until LiveData is updated
+            val expectedResult = PlatformState(success = platformList)
+            val result = viewModel.platformsState.observedValue()
+            assertEquals(expectedResult, result)
+        }
 
     @Test
-    fun testGetPlatformsError() = runTest {
-        // Mock data and response
-        val errorMessage = "Error fetching platforms"
-        val response =
-            NetworkCheck.Error<List<PlatformUiModel>>(message = errorMessage, networkError = true)
+    fun `given a database with no available platforms when the GetPlatforms function is called then ensure that an error is raised or handled appropriately`() =
+        runTest {
+            // Mock data and response
+            val errorMessage = "Error fetching platforms"
+            val response =
+                NetworkCheck.Error<List<PlatformUiModel>>(
+                    message = errorMessage,
+                    networkError = true
+                )
 
-        // Set up the mock behavior for the use case
-        `when`(getPlatformsUseCase.invoke()).thenReturn(response)
+            // Set up the mock behavior for the use case
+            `when`(getPlatformsUseCase.invoke()).thenReturn(response)
 
-        // Call the function to be tested
-        viewModel.getPlatforms()
+            // Call the function to be tested
+            viewModel.getPlatforms()
 
-        // Wait until LiveData is updated
-        val expectedResult = PlatformState(error = errorMessage)
-        val result = viewModel.platformsState.observedValue()
-        assertEquals(expectedResult, result)
-    }
+            // Wait until LiveData is updated
+            val expectedResult = PlatformState(error = errorMessage)
+            val result = viewModel.platformsState.observedValue()
+            assertEquals(expectedResult, result)
+        }
 }
