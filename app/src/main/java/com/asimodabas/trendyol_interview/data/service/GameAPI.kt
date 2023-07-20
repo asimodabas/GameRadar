@@ -14,13 +14,15 @@ import retrofit2.http.Query
 interface GameAPI {
 
     @GET(API_GAMES)
-    suspend fun getData(
+    suspend fun getAllData(
+        @Query("page") nextPage: String,
         @Query("key") apiKey: String = API_KEY
     ): GameDTO
 
     @GET(API_GAMES)
     suspend fun getGameSearch(
         @Query("search") searchQuery: String,
+        @Query("page") nextPage: String,
         @Query("key") apiKey: String = API_KEY
     ): GameDTO
 

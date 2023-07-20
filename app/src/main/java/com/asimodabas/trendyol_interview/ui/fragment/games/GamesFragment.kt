@@ -33,8 +33,7 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
         super.onViewCreated(view, savedInstanceState)
 
         searchQuery()
-        setupGamesRv()
-        setupPlatformsRv()
+        setupRv()
         observePlatformData()
         observeGameData()
     }
@@ -63,6 +62,7 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
             state.success.let { platforms ->
                 platformsRecyclerAdapter.submitList(platforms)
             }
+
             state.error.let { error ->
                 Log.d("Error", "ErrorState: $error")
             }
@@ -70,9 +70,16 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
     }
 
     private fun observeGameData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getGames()
+            }
+        }
         viewModel.gameState.observe(viewLifecycleOwner) { state ->
             state.success?.let { response ->
-                response.let { gamesRecyclerAdapter.submitList(it) }
+                lifecycleScope.launch {
+                    response.let { gamesRecyclerAdapter.submitData(it) }
+                }
             }
 
             state.error?.let { message ->
@@ -81,7 +88,7 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
         }
     }
 
-    private fun setupGamesRv() = with(binding) {
+    private fun setupRv() = with(binding) {
         gamesRV.apply {
             gamesRecyclerAdapter = GamesRecyclerAdapter(findNavController())
             adapter = gamesRecyclerAdapter
@@ -89,9 +96,6 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
             setHasFixedSize(true)
             clipToPadding = false
         }
-    }
-
-    private fun setupPlatformsRv() = with(binding) {
         platformsRV.apply {
             platformsRecyclerAdapter = PlatformsRecyclerAdapter(viewModel)
             adapter = platformsRecyclerAdapter

@@ -28,11 +28,13 @@ fun FragmentGamesDetailBinding.bind(
     customViewVisitWebsite.binding.apply {
         tvVisitConnect.text = state.getWebsiteTextView(root.context)
         tvVisitConnect.visibility = state.getWebsiteIsVisible()
+        visitConnectLink.visibility = state.getWebsiteIsVisible()
     }
 
     customViewVisitReddit.binding.apply {
         tvVisitConnect.text = state.getRedditTextView(root.context)
         tvVisitConnect.visibility = state.getRedditIsVisible()
+        visitConnectLink.visibility = state.getRedditIsVisible()
     }
 
     customViewInformations.binding.apply {

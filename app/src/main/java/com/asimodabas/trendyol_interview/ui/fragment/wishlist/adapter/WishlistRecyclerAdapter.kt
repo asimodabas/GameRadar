@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.asimodabas.trendyol_interview.common.loadUrl
 import com.asimodabas.trendyol_interview.databinding.LayoutWishlistRowBinding
-import com.asimodabas.trendyol_interview.domain.model.Detail
 import com.asimodabas.trendyol_interview.domain.model.ui_model.WishlistUiModel
 import com.asimodabas.trendyol_interview.ui.fragment.wishlist.WishlistFragmentDirections
 
@@ -43,7 +42,9 @@ class WishlistRecyclerAdapter(
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: WishlistUiModel, newItem: WishlistUiModel): Boolean {
+        override fun areContentsTheSame(
+            oldItem: WishlistUiModel, newItem: WishlistUiModel
+        ): Boolean {
             return oldItem == newItem
         }
     }
@@ -51,11 +52,8 @@ class WishlistRecyclerAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         return GameViewHolder(
             binding = LayoutWishlistRowBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            ),
-            navController = navController
+                LayoutInflater.from(parent.context), parent, false
+            ), navController = navController
         )
     }
 

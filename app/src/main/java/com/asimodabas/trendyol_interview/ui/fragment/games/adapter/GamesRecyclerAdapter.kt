@@ -3,8 +3,8 @@ package com.asimodabas.trendyol_interview.ui.fragment.games.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.NavController
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.asimodabas.trendyol_interview.common.loadUrl
 import com.asimodabas.trendyol_interview.databinding.LayoutMainRowBinding
@@ -13,7 +13,7 @@ import com.asimodabas.trendyol_interview.ui.fragment.games.GamesFragmentDirectio
 
 class GamesRecyclerAdapter(
     private val navController: NavController
-) : ListAdapter<GameUiModel, GamesRecyclerAdapter.GameViewHolder>(DiffCallback) {
+) : PagingDataAdapter<GameUiModel, GamesRecyclerAdapter.GameViewHolder>(DiffCallback) {
 
     class GameViewHolder(
         private val binding: LayoutMainRowBinding, private val navController: NavController
@@ -52,6 +52,6 @@ class GamesRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        getItem(position)?.let { holder.bind(it) }
     }
 }
