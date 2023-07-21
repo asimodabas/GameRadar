@@ -1,7 +1,5 @@
 package com.asimodabas.trendyol_interview.di
 
-import com.asimodabas.trendyol_interview.domain.mapper.detail.DetailMapper
-import com.asimodabas.trendyol_interview.domain.mapper.detail.DetailMapperImpl
 import com.asimodabas.trendyol_interview.domain.mapper.detail_local.DetailLocalMapper
 import com.asimodabas.trendyol_interview.domain.mapper.detail_local.DetailLocalMapperImpl
 import com.asimodabas.trendyol_interview.domain.mapper.game.GameMapper
@@ -22,9 +20,6 @@ abstract class MapperModule {
 
     @Binds
     abstract fun bindPlatformsMapper(platformMapperImpl: PlatformMapperImpl): PlatformMapper
-
-    @Binds
-    abstract fun bindDetailMapper(detailMapperImpl: DetailMapperImpl): DetailMapper
 
     @Binds
     abstract fun bindDetailLocalMapper(detailLocalMapperImpl: DetailLocalMapperImpl): DetailLocalMapper

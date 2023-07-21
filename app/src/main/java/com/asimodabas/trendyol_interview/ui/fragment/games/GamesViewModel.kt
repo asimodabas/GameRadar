@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.asimodabas.trendyol_interview.common.NetworkCheck
+import com.asimodabas.trendyol_interview.common.state.DetailState
 import com.asimodabas.trendyol_interview.common.state.GameState
-import com.asimodabas.trendyol_interview.common.state.PlatformState
 import com.asimodabas.trendyol_interview.domain.usecase.get_all_games.GetAllGamesPagerUseCase
 import com.asimodabas.trendyol_interview.domain.usecase.get_game_search.GetGameSearchPagerUseCase
 import com.asimodabas.trendyol_interview.domain.usecase.get_game_search.GetGameSearchUseCase
@@ -27,8 +27,8 @@ class GamesViewModel @Inject constructor(
     private val _gameState = MutableLiveData<GameState>()
     val gameState: LiveData<GameState> = _gameState
 
-    private val _platformsState = MutableLiveData<PlatformState>()
-    val platformsState: LiveData<PlatformState> = _platformsState
+    private val _platformsState = MutableLiveData<PlatformsState>()
+    val platformsState: LiveData<PlatformsState> = _platformsState
 
     fun getGames() = viewModelScope.launch {
         getAllGamesPagerUseCase.invoke().cachedIn(this)
@@ -49,18 +49,16 @@ class GamesViewModel @Inject constructor(
             when (val request = getPlatformsUseCase.invoke()) {
                 is NetworkCheck.Success -> {
                     _platformsState.postValue(
-                        PlatformState(
-                            success = request.data
-                        )
+                        request.data?.let { data ->
+                            PlatformsState(
+                                success = data
+                            )
+                        }
                     )
                 }
 
                 is NetworkCheck.Error -> {
-                    _platformsState.postValue(
-                        PlatformState(
-                            error = request.message
-                        )
-                    )
+                    DetailState(error = request.message)
                 }
             }
         }

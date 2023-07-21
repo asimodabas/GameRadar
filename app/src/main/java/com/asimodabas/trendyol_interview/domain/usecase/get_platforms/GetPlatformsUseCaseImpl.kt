@@ -11,7 +11,8 @@ class GetPlatformsUseCaseImpl @Inject constructor(
     private val gameRepository: GameRepository,
     private val platformMapper: PlatformMapper
 ) : GetPlatformsUseCase {
-    override suspend fun invoke(): NetworkCheck<List<PlatformUiModel>> = safeApiRequest {
-        platformMapper.map(gameRepository.getGamePlatforms())
-    }
+    override suspend fun invoke(): NetworkCheck<List<PlatformUiModel>?> =
+        safeApiRequest {
+            platformMapper.map(gameRepository.getGamePlatforms())
+        }
 }

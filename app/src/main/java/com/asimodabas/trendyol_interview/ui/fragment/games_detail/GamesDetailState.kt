@@ -11,7 +11,6 @@ import com.asimodabas.trendyol_interview.domain.model.Detail
 data class GamesDetailState(
     var data: Detail
 ) {
-
     fun publisherIsVisible(): Int {
         return if (data.publishers.isNullOrEmpty()) {
             View.GONE

@@ -1,7 +1,6 @@
 package com.asimodabas.trendyol_interview.ui.fragment.games
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -16,19 +15,16 @@ import com.asimodabas.trendyol_interview.R
 import com.asimodabas.trendyol_interview.common.Constants.GAMES_RV_GRID_COUNT
 import com.asimodabas.trendyol_interview.common.viewBinding
 import com.asimodabas.trendyol_interview.databinding.FragmentGamesBinding
-import com.asimodabas.trendyol_interview.domain.listener.PlatformsClickListener
-import com.asimodabas.trendyol_interview.domain.model.ui_model.PlatformUiModel
 import com.asimodabas.trendyol_interview.ui.fragment.games.adapter.GamesRecyclerAdapter
 import com.asimodabas.trendyol_interview.ui.fragment.games.adapter.PlatformsRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class GamesFragment : Fragment(R.layout.fragment_games), PlatformsClickListener {
+class GamesFragment : Fragment(R.layout.fragment_games) {
 
     private val binding by viewBinding(FragmentGamesBinding::bind)
     private val viewModel: GamesViewModel by viewModels()
-    private val platformsState = PlatformsState()
     private lateinit var gamesRecyclerAdapter: GamesRecyclerAdapter
     private lateinit var platformsRecyclerAdapter: PlatformsRecyclerAdapter
 
@@ -61,13 +57,11 @@ class GamesFragment : Fragment(R.layout.fragment_games), PlatformsClickListener 
                 viewModel.getPlatforms()
             }
         }
-        viewModel.platformsState.observe(viewLifecycleOwner) { state ->
-            state.success.let { platforms ->
-                platformsRecyclerAdapter.submitList(platforms)
-            }
 
-            state.error.let { error ->
-                Log.d("Error", "ErrorState: $error")
+        viewModel.platformsState.observe(viewLifecycleOwner) { state ->
+            platformsRecyclerAdapter.submitList(state.success)
+            platformsRecyclerAdapter.platformListener = {
+                state.getPlatformClick(viewModel = viewModel, platform = it)
             }
         }
     }
@@ -100,13 +94,9 @@ class GamesFragment : Fragment(R.layout.fragment_games), PlatformsClickListener 
             clipToPadding = false
         }
         platformsRV.apply {
-            platformsRecyclerAdapter = PlatformsRecyclerAdapter(this@GamesFragment,platformsState)
+            platformsRecyclerAdapter = PlatformsRecyclerAdapter()
             adapter = platformsRecyclerAdapter
             clipToPadding = false
         }
-    }
-
-    override fun onItemClicked(item: PlatformUiModel) {
-        platformsState.getGamesClick(item, viewModel)
     }
 }

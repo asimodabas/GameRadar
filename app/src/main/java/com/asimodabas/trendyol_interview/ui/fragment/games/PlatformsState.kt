@@ -1,44 +1,25 @@
 package com.asimodabas.trendyol_interview.ui.fragment.games
 
 import com.asimodabas.trendyol_interview.R
-import com.asimodabas.trendyol_interview.databinding.LayoutPlatformRowBinding
 import com.asimodabas.trendyol_interview.domain.model.ui_model.PlatformUiModel
 
-class PlatformsState {
-    private val selectedPlatforms = mutableSetOf<Int>()
+data class PlatformsState(
+    var data: PlatformUiModel? = null,
+    var success: List<PlatformUiModel> = emptyList()
+) {
+    fun getPlatformNameTextView(): String = data?.name.toString()
 
-    fun isSelected(id: Int): Boolean {
-        return selectedPlatforms.contains(id)
-    }
-
-    fun toggleSelected(id: Int) {
-        if (selectedPlatforms.contains(id)) {
-            selectedPlatforms.remove(id)
+    fun updatePlatfordBackground(): Int {
+        return if (data?.isSelected == true) {
+            R.drawable.bg_custom_platform_shape_select
         } else {
-            selectedPlatforms.add(id)
+            R.drawable.bg_custom_platform_shape
         }
     }
 
-    fun updateBackground(selected: Boolean, binding: LayoutPlatformRowBinding) {
-        if (selected) {
-            binding.tvPlatformName.setBackgroundResource(R.drawable.bg_custom_platform_shape_select)
-        } else {
-            binding.tvPlatformName.setBackgroundResource(R.drawable.bg_custom_platform_shape)
-        }
-    }
-
-    fun bindPlatform(binding: LayoutPlatformRowBinding, platform: PlatformUiModel) {
-        with(binding) {
-            tvPlatformName.text = platform.name
-            updateBackground(isSelected(platform.id), this)
-        }
-    }
-
-    fun getGamesClick(item: PlatformUiModel, viewModel: GamesViewModel) {
-        item.isSelected = !item.isSelected
-
-        if (item.isSelected) {
-            viewModel.getSearchGames(item.name)
+    fun getPlatformClick(viewModel: GamesViewModel, platform: PlatformUiModel) {
+        if (platform.isSelected) {
+            viewModel.getSearchGames(platform.name)
         } else {
             viewModel.getGames()
         }
