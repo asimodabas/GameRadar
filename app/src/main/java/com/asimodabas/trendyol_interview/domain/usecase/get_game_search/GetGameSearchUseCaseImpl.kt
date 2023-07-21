@@ -11,8 +11,8 @@ class GetGameSearchUseCaseImpl @Inject constructor(
     private val gameRepository: GameRepository,
     private val gameMapper: GameMapper
 ) : GetGameSearchUseCase {
-    override suspend fun invoke(query: String, nextPage: String): NetworkCheck<List<GameUiModel>?> =
+    override suspend fun invoke(searchQuery: String, nextPage: String): NetworkCheck<List<GameUiModel>?> =
         safeApiRequest {
-            gameMapper.map(gameRepository.getGameSearch(query, nextPage))
+            gameMapper.map(gameRepository.getGameSearch(searchQuery, nextPage))
         }
 }

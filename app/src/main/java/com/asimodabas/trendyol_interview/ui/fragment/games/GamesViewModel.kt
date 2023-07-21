@@ -37,8 +37,8 @@ class GamesViewModel @Inject constructor(
             }
     }
 
-    fun getSearchGames(searchQuers: String) = viewModelScope.launch {
-        getGameSearchPagerUseCase.invoke(searchQuers, getGameSearchUseCase).cachedIn(this)
+    fun getSearchGames(searchQuery: String) = viewModelScope.launch {
+        getGameSearchPagerUseCase.invoke(searchQuery, getGameSearchUseCase).cachedIn(this)
             .collect { pagingData ->
                 _gameState.postValue(GameState(success = pagingData))
             }

@@ -5,43 +5,29 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.asimodabas.trendyol_interview.R
 import com.asimodabas.trendyol_interview.databinding.LayoutPlatformRowBinding
+import com.asimodabas.trendyol_interview.domain.listener.PlatformsClickListener
 import com.asimodabas.trendyol_interview.domain.model.ui_model.PlatformUiModel
-import com.asimodabas.trendyol_interview.ui.fragment.games.GamesViewModel
+import com.asimodabas.trendyol_interview.ui.fragment.games.PlatformsState
 
 class PlatformsRecyclerAdapter(
-    private val gamesViewModel: GamesViewModel
+    private val platformsClickListener: PlatformsClickListener,
+    private val platformsState: PlatformsState
 ) : ListAdapter<PlatformUiModel, PlatformsRecyclerAdapter.PlatformViewHolder>(DiffCallback) {
 
     class PlatformViewHolder(
-        private val gamesViewModel: GamesViewModel,
         private val binding: LayoutPlatformRowBinding,
+        private val platformsState: PlatformsState,
+        private val platformsClickListener: PlatformsClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(detail: PlatformUiModel) {
-            with(binding) {
-                tvPlatformName.text = detail.name
-                updateBackground(detail.isSelected)
-
-                root.setOnClickListener {
-                    val isSelected = !detail.isSelected
-                    updateBackground(isSelected)
-                    detail.isSelected = isSelected
-
-                    if (isSelected) {
-                        gamesViewModel.getSearchGames(detail.name)
-                    } else {
-                        gamesViewModel.getGames()
-                    }
+        fun bind(item: PlatformUiModel) {
+            with(platformsState) {
+                bindPlatform(binding, item)
+                binding.root.setOnClickListener {
+                    toggleSelected(item.id)
+                    updateBackground(isSelected(item.id), binding)
+                    platformsClickListener.onItemClicked(item)
                 }
-            }
-        }
-
-        fun updateBackground(selected: Boolean) {
-            if (selected) {
-                binding.tvPlatformName.setBackgroundResource(R.drawable.bg_custom_platform_shape_select)
-            } else {
-                binding.tvPlatformName.setBackgroundResource(R.drawable.bg_custom_platform_shape)
             }
         }
     }
@@ -62,12 +48,11 @@ class PlatformsRecyclerAdapter(
         return PlatformViewHolder(
             binding = LayoutPlatformRowBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            ), gamesViewModel = gamesViewModel
+            ), platformsClickListener = platformsClickListener, platformsState = platformsState
         )
     }
 
     override fun onBindViewHolder(holder: PlatformViewHolder, position: Int) {
         holder.bind(currentList[position])
-        holder.updateBackground(currentList[position].isSelected)
     }
 }

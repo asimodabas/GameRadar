@@ -16,16 +16,19 @@ import com.asimodabas.trendyol_interview.R
 import com.asimodabas.trendyol_interview.common.Constants.GAMES_RV_GRID_COUNT
 import com.asimodabas.trendyol_interview.common.viewBinding
 import com.asimodabas.trendyol_interview.databinding.FragmentGamesBinding
+import com.asimodabas.trendyol_interview.domain.listener.PlatformsClickListener
+import com.asimodabas.trendyol_interview.domain.model.ui_model.PlatformUiModel
 import com.asimodabas.trendyol_interview.ui.fragment.games.adapter.GamesRecyclerAdapter
 import com.asimodabas.trendyol_interview.ui.fragment.games.adapter.PlatformsRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class GamesFragment : Fragment(R.layout.fragment_games) {
+class GamesFragment : Fragment(R.layout.fragment_games), PlatformsClickListener {
 
     private val binding by viewBinding(FragmentGamesBinding::bind)
     private val viewModel: GamesViewModel by viewModels()
+    private val platformsState = PlatformsState()
     private lateinit var gamesRecyclerAdapter: GamesRecyclerAdapter
     private lateinit var platformsRecyclerAdapter: PlatformsRecyclerAdapter
 
@@ -97,9 +100,13 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
             clipToPadding = false
         }
         platformsRV.apply {
-            platformsRecyclerAdapter = PlatformsRecyclerAdapter(viewModel)
+            platformsRecyclerAdapter = PlatformsRecyclerAdapter(this@GamesFragment,platformsState)
             adapter = platformsRecyclerAdapter
             clipToPadding = false
         }
+    }
+
+    override fun onItemClicked(item: PlatformUiModel) {
+        platformsState.getGamesClick(item, viewModel)
     }
 }

@@ -7,7 +7,7 @@ interface GameRepository {
 
     suspend fun getAllGames(nextPage: String): GameDTO
 
-    suspend fun getGameSearch(search: String, nextPage: String): GameDTO
+    suspend fun getGameSearch(searchQuery: String, nextPage: String): GameDTO
 
     suspend fun getGamePlatforms(): PlatformDTO
 }

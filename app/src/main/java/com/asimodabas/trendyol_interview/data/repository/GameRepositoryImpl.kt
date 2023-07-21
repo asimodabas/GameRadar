@@ -10,7 +10,7 @@ class GameRepositoryImpl @Inject constructor(
 
     override suspend fun getAllGames(nextPage: String) = apiFactory.getAllData(nextPage)
 
-    override suspend fun getGameSearch(search: String, nextPage: String) = apiFactory.getGameSearch(search, nextPage)
+    override suspend fun getGameSearch(searchQuery: String, nextPage: String) = apiFactory.getGameSearch(searchQuery, nextPage)
 
     override suspend fun getGamePlatforms() = apiFactory.getParentPlatform()
 }
