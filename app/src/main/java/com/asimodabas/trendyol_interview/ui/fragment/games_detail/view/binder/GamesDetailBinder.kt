@@ -1,12 +1,13 @@
-package com.asimodabas.trendyol_interview.ui.fragment.games_detail
+package com.asimodabas.trendyol_interview.ui.fragment.games_detail.view.binder
 
 import com.asimodabas.trendyol_interview.common.Constants.DESCRIPTION_MAX_COUNT
 import com.asimodabas.trendyol_interview.common.loadUrl
 import com.asimodabas.trendyol_interview.common.makeCollapsible
 import com.asimodabas.trendyol_interview.databinding.FragmentGamesDetailBinding
+import com.asimodabas.trendyol_interview.ui.fragment.games_detail.view.state.GamesDetailViewState
 
 fun FragmentGamesDetailBinding.bind(
-    state: GamesDetailState,
+    state: GamesDetailViewState,
 ) {
 
     tvName.text = state.getGameNameTextView()

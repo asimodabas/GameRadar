@@ -33,8 +33,9 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
 
         searchQuery()
         setupRv()
-        observePlatformData()
         observeGameData()
+        observePlatformData()
+        observeSelectedPlatformData()
     }
 
     private fun searchQuery() {
@@ -49,21 +50,6 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
                 return true
             }
         })
-    }
-
-    private fun observePlatformData() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.getPlatforms()
-            }
-        }
-
-        viewModel.platformsState.observe(viewLifecycleOwner) { state ->
-            platformsRecyclerAdapter.submitList(state.success)
-            platformsRecyclerAdapter.platformListener = {
-                state.getPlatformClick(viewModel = viewModel, platform = it)
-            }
-        }
     }
 
     private fun observeGameData() {
@@ -81,6 +67,27 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
 
             state.error?.let { message ->
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun observePlatformData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getPlatforms()
+            }
+        }
+
+        viewModel.platformItemViewState.observe(viewLifecycleOwner) { state ->
+            platformsRecyclerAdapter.submitList(state)
+        }
+    }
+
+    private fun observeSelectedPlatformData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            platformsRecyclerAdapter.platformListener = { position ->
+                viewModel.onPlatformItemClick(position)
+                platformsRecyclerAdapter.notifyDataSetChanged()
             }
         }
     }

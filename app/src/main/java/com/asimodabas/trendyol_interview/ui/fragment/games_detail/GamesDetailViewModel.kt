@@ -13,6 +13,7 @@ import com.asimodabas.trendyol_interview.domain.model.DetailLocal
 import com.asimodabas.trendyol_interview.domain.usecase.delete_detail.DeleteDetailUseCase
 import com.asimodabas.trendyol_interview.domain.usecase.get_game_detail.GetGameDetailUseCase
 import com.asimodabas.trendyol_interview.domain.usecase.insert_details.InsertDetailsUseCase
+import com.asimodabas.trendyol_interview.ui.fragment.games_detail.view.state.GamesDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,8 +27,8 @@ class GamesDetailViewModel @Inject constructor(
     private var sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
-    private val _gamesDetailState = MutableLiveData<GamesDetailState?>()
-    val gamesDetailState: LiveData<GamesDetailState?> = _gamesDetailState
+    private val _gamesDetailViewState = MutableLiveData<GamesDetailViewState?>()
+    val gamesDetailViewState: LiveData<GamesDetailViewState?> = _gamesDetailViewState
 
     private val _wishlistState = MutableLiveData<Boolean>()
     val wishlistState: LiveData<Boolean> = _wishlistState
@@ -35,9 +36,9 @@ class GamesDetailViewModel @Inject constructor(
     fun getDetail(id: Int) = viewModelScope.launch {
         when (val request = getGameDetailUseCase.invoke(id)) {
             is NetworkCheck.Success -> {
-                _gamesDetailState.postValue(
+                _gamesDetailViewState.postValue(
                     request.data?.let { data ->
-                        GamesDetailState(
+                        GamesDetailViewState(
                             data = data
                         )
                     }

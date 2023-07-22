@@ -11,6 +11,7 @@ import com.asimodabas.trendyol_interview.common.getUrl
 import com.asimodabas.trendyol_interview.common.viewBinding
 import com.asimodabas.trendyol_interview.common.wishlistResource
 import com.asimodabas.trendyol_interview.databinding.FragmentGamesDetailBinding
+import com.asimodabas.trendyol_interview.ui.fragment.games_detail.view.binder.bind
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,7 +30,7 @@ class GamesDetailFragment : Fragment(R.layout.fragment_games_detail) {
 
     private fun observeDetailData() = with(binding) {
         with(viewModel) {
-            gamesDetailState.observe(viewLifecycleOwner) { detailState ->
+            gamesDetailViewState.observe(viewLifecycleOwner) { detailState ->
                 detailState?.let { state ->
                     bind(state)
 

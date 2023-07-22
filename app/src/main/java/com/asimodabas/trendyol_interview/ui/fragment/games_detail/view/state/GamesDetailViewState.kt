@@ -1,4 +1,4 @@
-package com.asimodabas.trendyol_interview.ui.fragment.games_detail
+package com.asimodabas.trendyol_interview.ui.fragment.games_detail.view.state
 
 import android.content.Context
 import android.text.Html
@@ -8,7 +8,7 @@ import com.asimodabas.trendyol_interview.R
 import com.asimodabas.trendyol_interview.common.formatMetaCritic
 import com.asimodabas.trendyol_interview.domain.model.Detail
 
-data class GamesDetailState(
+data class GamesDetailViewState(
     var data: Detail
 ) {
     fun publisherIsVisible(): Int {

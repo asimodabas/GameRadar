@@ -12,6 +12,7 @@ import com.asimodabas.trendyol_interview.domain.usecase.get_all_games.GetAllGame
 import com.asimodabas.trendyol_interview.domain.usecase.get_game_search.GetGameSearchPagerUseCase
 import com.asimodabas.trendyol_interview.domain.usecase.get_game_search.GetGameSearchUseCase
 import com.asimodabas.trendyol_interview.domain.usecase.get_platforms.GetPlatformsUseCase
+import com.asimodabas.trendyol_interview.ui.fragment.games.view.PlatformItemViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,8 +28,22 @@ class GamesViewModel @Inject constructor(
     private val _gameState = MutableLiveData<GameState>()
     val gameState: LiveData<GameState> = _gameState
 
-    private val _platformsState = MutableLiveData<PlatformsState>()
-    val platformsState: LiveData<PlatformsState> = _platformsState
+    private val _platformItemViewState = MutableLiveData<List<PlatformItemViewState>?>()
+    val platformItemViewState: LiveData<List<PlatformItemViewState>?> = _platformItemViewState
+
+    fun onPlatformItemClick(position: Int) = viewModelScope.launch {
+        val platformItemViewStateList = _platformItemViewState.value?.toMutableList() ?: mutableListOf()
+        val selectedPlatformItem = platformItemViewStateList[position]
+
+        selectedPlatformItem.uiModel.isSelected = !selectedPlatformItem.uiModel.isSelected
+        _platformItemViewState.value = platformItemViewStateList
+
+        if (selectedPlatformItem.uiModel.isSelected) {
+            getSearchGames(selectedPlatformItem.uiModel.name)
+        } else {
+            getGames()
+        }
+    }
 
     fun getGames() = viewModelScope.launch {
         getAllGamesPagerUseCase.invoke().cachedIn(this)
@@ -44,22 +59,20 @@ class GamesViewModel @Inject constructor(
             }
     }
 
-    fun getPlatforms() {
-        viewModelScope.launch {
-            when (val request = getPlatformsUseCase.invoke()) {
-                is NetworkCheck.Success -> {
-                    _platformsState.postValue(
-                        request.data?.let { data ->
-                            PlatformsState(
-                                success = data
-                            )
+    fun getPlatforms() = viewModelScope.launch {
+        when (val request = getPlatformsUseCase.invoke()) {
+            is NetworkCheck.Success -> {
+                _platformItemViewState.postValue(
+                    request.data?.let { data ->
+                        data.map {
+                            PlatformItemViewState(uiModel = it)
                         }
-                    )
-                }
+                    }
+                )
+            }
 
-                is NetworkCheck.Error -> {
-                    DetailState(error = request.message)
-                }
+            is NetworkCheck.Error -> {
+                DetailState(error = request.message)
             }
         }
     }

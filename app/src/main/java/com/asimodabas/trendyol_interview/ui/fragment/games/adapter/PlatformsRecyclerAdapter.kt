@@ -6,38 +6,37 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.asimodabas.trendyol_interview.databinding.LayoutPlatformRowBinding
-import com.asimodabas.trendyol_interview.domain.model.ui_model.PlatformUiModel
-import com.asimodabas.trendyol_interview.ui.fragment.games.PlatformsState
+import com.asimodabas.trendyol_interview.ui.fragment.games.view.PlatformItemViewState
 
 class PlatformsRecyclerAdapter :
-    ListAdapter<PlatformUiModel, PlatformsRecyclerAdapter.PlatformViewHolder>(DiffCallback) {
-    var platformListener: ((PlatformUiModel) -> Unit)? = null
+    ListAdapter<PlatformItemViewState, PlatformsRecyclerAdapter.PlatformViewHolder>(DiffCallback) {
 
-    class PlatformViewHolder(
-        private val binding: LayoutPlatformRowBinding,
-        private val platformListener: ((PlatformUiModel) -> Unit)?,
+    var platformListener: ((position:Int) -> Unit)? = null
+
+    inner class PlatformViewHolder(
+        private val binding: LayoutPlatformRowBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: PlatformUiModel) = with(binding) {
-            val platformsState = PlatformsState(data = item)
+        fun bind(platformItemViewState: PlatformItemViewState) = with(binding) {
+            tvPlatformName.text = currentList[bindingAdapterPosition].getPlatformName()
 
-            tvPlatformName.text = platformsState.getPlatformNameTextView()
-            root.setBackgroundResource(platformsState.updatePlatfordBackground())
+            root.setBackgroundResource(currentList[bindingAdapterPosition].updatePlatformBackground())
             root.setOnClickListener {
-                item.isSelected = !item.isSelected
-                root.setBackgroundResource(platformsState.updatePlatfordBackground())
-                platformListener?.invoke(item)
+                platformListener?.invoke(bindingAdapterPosition)
             }
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<PlatformUiModel>() {
-        override fun areItemsTheSame(oldItem: PlatformUiModel, newItem: PlatformUiModel): Boolean {
-            return oldItem.id == newItem.id
+    companion object DiffCallback : DiffUtil.ItemCallback<PlatformItemViewState>() {
+        override fun areItemsTheSame(
+            oldItem: PlatformItemViewState,
+            newItem: PlatformItemViewState
+        ): Boolean {
+            return oldItem.uiModel.id == newItem.uiModel.id
         }
 
         override fun areContentsTheSame(
-            oldItem: PlatformUiModel, newItem: PlatformUiModel
+            oldItem: PlatformItemViewState, newItem: PlatformItemViewState
         ): Boolean {
             return oldItem == newItem
         }
@@ -47,8 +46,7 @@ class PlatformsRecyclerAdapter :
         return PlatformViewHolder(
             binding = LayoutPlatformRowBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            ),
-            platformListener = platformListener,
+            )
         )
     }
 

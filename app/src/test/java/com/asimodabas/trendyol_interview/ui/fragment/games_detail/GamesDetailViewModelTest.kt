@@ -10,6 +10,7 @@ import com.asimodabas.trendyol_interview.domain.mapper.detail_local.DetailLocalM
 import com.asimodabas.trendyol_interview.domain.usecase.delete_detail.DeleteDetailUseCase
 import com.asimodabas.trendyol_interview.domain.usecase.get_game_detail.GetGameDetailUseCase
 import com.asimodabas.trendyol_interview.domain.usecase.insert_details.InsertDetailsUseCase
+import com.asimodabas.trendyol_interview.ui.fragment.games_detail.view.state.GamesDetailViewState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -89,8 +90,8 @@ class GamesDetailViewModelTest {
             viewModel.getDetail(id)
 
             // Wait until LiveData is updated
-            val expectedResult = GamesDetailState(data = detail)
-            val result = viewModel.gamesDetailState.observedValue()
+            val expectedResult = GamesDetailViewState(data = detail)
+            val result = viewModel.gamesDetailViewState.observedValue()
             assertEquals(expectedResult, result)
         }
 
