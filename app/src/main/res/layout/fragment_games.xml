@@ -1,45 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<RelativeLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.fragment.games.GamesFragment">
+    android:padding="10dp">
 
     <TextView
+        android:id="@+id/tvGamesInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="5dp"
         android:text="@string/games"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textColor="@color/white" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_below="@+id/tvGamesInfo"
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/bg_custom_platform_shape"
         android:theme="@style/ThemeOverlay.SearchView"
+        app:iconifiedByDefault="false"
         app:queryHint="@string/search" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/categoriesRV"
-        android:layout_width="wrap_content"
+        android:id="@+id/platformsRV"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_below="@+id/searchView"
+        android:layout_marginVertical="5dp"
         android:orientation="horizontal"
-        android:padding="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gamesRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+        android:layout_below="@+id/platformsRV"
+        android:layout_marginVertical="5dp" />
+</RelativeLayout>
