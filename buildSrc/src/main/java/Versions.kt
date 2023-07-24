@@ -6,6 +6,7 @@ object Sdk {
     const val minSdk = 24
     const val compileSdk = 33
     const val applicationId = "com.asimodabas.trendyol_interview"
+    const val r8Uri = "https://storage.googleapis.com/r8-releases/raw"
     const val targetSdk = 33
     const val versionCode = 1
     const val versionName = "1.0"
@@ -39,7 +40,11 @@ object AndroidX {
     const val constraintLayout = "2.1.4"
     const val startupRuntime = "1.1.1"
     const val room = "2.5.2"
+    const val paging = "3.1.1"
+    const val security = "1.1.0-alpha06"
+    const val r8Tools = "r8:8.2.16-dev"
 }
+
 
 object Network {
     const val retrofit = "2.9.0"

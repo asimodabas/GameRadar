@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/gamesFragment">
+
+    <fragment
+        android:id="@+id/gamesFragment"
+        android:name="com.asimodabas.presentation.fragment.games.GamesFragment"
+        android:label="fragment_games"
+        tools:layout="@layout/fragment_games">
+        <action
+            android:id="@+id/action_gamesFragment_to_gamesDetailFragment"
+            app:destination="@id/gamesDetailFragment"
+            app:enterAnim="@anim/open_component_from_right"
+            app:exitAnim="@anim/close_component_from_left"
+            app:popEnterAnim="@anim/open_component_from_left"
+            app:popExitAnim="@anim/close_component_from_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/gamesDetailFragment"
+        android:name="com.asimodabas.presentation.fragment.games_detail.GamesDetailFragment"
+        android:label="fragment_games_detail"
+        tools:layout="@layout/fragment_games_detail">
+        <argument
+            android:name="detailArgs"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_gamesDetailFragment_to_gamesFragment"
+            app:destination="@id/gamesFragment"
+            app:enterAnim="@anim/open_component_from_right"
+            app:exitAnim="@anim/close_component_from_left"
+            app:popEnterAnim="@anim/open_component_from_left"
+            app:popExitAnim="@anim/close_component_from_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.asimodabas.presentation.fragment.wishlist.WishlistFragment"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist">
+        <action
+            android:id="@+id/action_wishlistFragment_to_gamesDetailFragment"
+            app:destination="@id/gamesDetailFragment"
+            app:enterAnim="@anim/open_component_from_right"
+            app:exitAnim="@anim/close_component_from_left"
+            app:popEnterAnim="@anim/open_component_from_left"
+            app:popExitAnim="@anim/close_component_from_right" />
+
+    </fragment>
+</navigation>
