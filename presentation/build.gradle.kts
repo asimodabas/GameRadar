@@ -49,8 +49,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:${AndroidX.constraintLayout}")
     implementation("androidx.navigation:navigation-fragment-ktx:${AndroidX.navigation}")
     implementation("androidx.navigation:navigation-ui-ktx:${AndroidX.navigation}")
-    implementation ("androidx.security:security-crypto:${AndroidX.security}")
-    implementation ("androidx.paging:paging-runtime-ktx:${AndroidX.paging}")
+    implementation("androidx.security:security-crypto:${AndroidX.security}")
+    implementation("androidx.paging:paging-runtime-ktx:${AndroidX.paging}")
     kapt("androidx.hilt:hilt-compiler:${AndroidX.hiltWork}")
 
     // Google
@@ -59,4 +59,11 @@ dependencies {
 
     // Glide
     implementation("com.github.bumptech.glide:glide:${Other.glide}")
+
+    testImplementation("io.mockk:mockk:${Test.mockk}")
+    testImplementation("junit:junit:${Test.junit}")
+    testImplementation("org.mockito:mockito-core:${Test.mockito}")
+    testImplementation("com.google.truth:truth:${Test.truth}")
+    testImplementation("androidx.arch.core:core-testing:${Test.arch}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Test.coroutines}")
 }

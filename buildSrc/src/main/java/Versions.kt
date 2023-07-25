@@ -17,6 +17,15 @@ object Kotlin {
     const val coroutines = "1.6.2"
 }
 
+object Test {
+    const val mockk = "1.13.5"
+    const val junit = "4.13.2"
+    const val mockito = "5.4.0"
+    const val truth = "1.1.3"
+    const val arch = "2.2.0"
+    const val coroutines = "1.6.2"
+}
+
 object ComposeOptions {
     const val kotlinCompilerExtensionVersion = "1.4.5"
 }

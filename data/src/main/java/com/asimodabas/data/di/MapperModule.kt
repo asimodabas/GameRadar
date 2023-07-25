@@ -1,11 +1,11 @@
 package com.asimodabas.data.di
 
-import com.asimodabas.data.data.mapper.detail_local.DetailLocalMapper
-import com.asimodabas.data.data.mapper.detail_local.DetailLocalMapperImpl
-import com.asimodabas.data.data.mapper.game.GameMapper
-import com.asimodabas.data.data.mapper.game.GameMapperImpl
-import com.asimodabas.data.data.mapper.platform.PlatformMapper
-import com.asimodabas.data.data.mapper.platform.PlatformMapperImpl
+import com.asimodabas.data.mapper.detail_local.DetailLocalMapper
+import com.asimodabas.data.mapper.detail_local.DetailLocalMapperImpl
+import com.asimodabas.data.mapper.game.GameMapper
+import com.asimodabas.data.mapper.game.GameMapperImpl
+import com.asimodabas.data.mapper.platform.PlatformMapper
+import com.asimodabas.data.mapper.platform.PlatformMapperImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

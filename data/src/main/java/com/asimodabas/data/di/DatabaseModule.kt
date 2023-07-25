@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.asimodabas.domain.common.Constants.GAMES_DB_NAME
 import com.asimodabas.domain.common.SharedPrefManager
-import com.asimodabas.data.data.room.GameDB
+import com.asimodabas.data.room.GameDB
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

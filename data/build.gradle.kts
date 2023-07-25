@@ -65,4 +65,11 @@ dependencies {
     //OkHttp
     implementation("com.squareup.okhttp3:okhttp:${Other.okhttp3}")
     implementation("com.squareup.okhttp3:logging-interceptor:${Other.okhttp3}")
+
+    testImplementation("io.mockk:mockk:${Test.mockk}")
+    testImplementation("junit:junit:${Test.junit}")
+    testImplementation("org.mockito:mockito-core:${Test.mockito}")
+    testImplementation("com.google.truth:truth:${Test.truth}")
+    testImplementation("androidx.arch.core:core-testing:${Test.arch}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Test.coroutines}")
 }

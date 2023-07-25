@@ -1,7 +1,7 @@
 package com.asimodabas.data.di
 
 import com.asimodabas.domain.common.Constants.BASE_URL
-import com.asimodabas.data.data.service.GameAPI
+import com.asimodabas.data.service.GameAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.asimodabas.data.data.mapper.detail_local.DetailLocalMapper
+import com.asimodabas.data.mapper.detail_local.DetailLocalMapper
 import com.asimodabas.domain.common.NetworkCheck
 import com.asimodabas.domain.state.DetailState
 import com.asimodabas.domain.model.Detail
