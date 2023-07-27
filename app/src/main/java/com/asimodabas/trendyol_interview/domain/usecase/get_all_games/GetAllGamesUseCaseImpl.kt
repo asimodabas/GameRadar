@@ -11,7 +11,8 @@ class GetAllGamesUseCaseImpl @Inject constructor(
     private val gameRepository: GameRepository,
     private val gameMapper: GameMapper
 ) : GetAllGamesUseCase {
-    override suspend fun invoke(): NetworkCheck<List<GameUiModel>> = safeApiRequest {
-        gameMapper.map(gameRepository.getAllGames())
-    }
+    override suspend fun invoke(nextPage: String): NetworkCheck<List<GameUiModel>> =
+        safeApiRequest {
+            gameMapper.map(gameRepository.getAllGames(nextPage))
+        }
 }

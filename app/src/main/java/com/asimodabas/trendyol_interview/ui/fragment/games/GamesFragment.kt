@@ -1,7 +1,6 @@
 package com.asimodabas.trendyol_interview.ui.fragment.games
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -33,10 +32,10 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
         super.onViewCreated(view, savedInstanceState)
 
         searchQuery()
-        setupGamesRv()
-        setupPlatformsRv()
-        observePlatformData()
+        setupRv()
         observeGameData()
+        observePlatformData()
+        observeSelectedPlatformData()
     }
 
     private fun searchQuery() {
@@ -53,26 +52,17 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
         })
     }
 
-    private fun observePlatformData() {
+    private fun observeGameData() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.getPlatforms()
+                viewModel.getGames()
             }
         }
-        viewModel.platformsState.observe(viewLifecycleOwner) { state ->
-            state.success.let { platforms ->
-                platformsRecyclerAdapter.submitList(platforms)
-            }
-            state.error.let { error ->
-                Log.d("Error", "ErrorState: $error")
-            }
-        }
-    }
-
-    private fun observeGameData() {
         viewModel.gameState.observe(viewLifecycleOwner) { state ->
             state.success?.let { response ->
-                response.let { gamesRecyclerAdapter.submitList(it) }
+                lifecycleScope.launch {
+                    response.let { gamesRecyclerAdapter.submitData(it) }
+                }
             }
 
             state.error?.let { message ->
@@ -81,7 +71,28 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
         }
     }
 
-    private fun setupGamesRv() = with(binding) {
+    private fun observePlatformData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getPlatforms()
+            }
+        }
+
+        viewModel.platformItemViewState.observe(viewLifecycleOwner) { state ->
+            platformsRecyclerAdapter.submitList(state)
+        }
+    }
+
+    private fun observeSelectedPlatformData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            platformsRecyclerAdapter.platformListener = { position ->
+                viewModel.onPlatformItemClick(position)
+                platformsRecyclerAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun setupRv() = with(binding) {
         gamesRV.apply {
             gamesRecyclerAdapter = GamesRecyclerAdapter(findNavController())
             adapter = gamesRecyclerAdapter
@@ -89,11 +100,8 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
             setHasFixedSize(true)
             clipToPadding = false
         }
-    }
-
-    private fun setupPlatformsRv() = with(binding) {
         platformsRV.apply {
-            platformsRecyclerAdapter = PlatformsRecyclerAdapter(viewModel)
+            platformsRecyclerAdapter = PlatformsRecyclerAdapter()
             adapter = platformsRecyclerAdapter
             clipToPadding = false
         }

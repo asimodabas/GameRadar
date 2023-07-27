@@ -46,7 +46,11 @@ fun wishlistResource(
     }
 }
 
-fun formatMetaCritic(metaCritic: Int?): Pair<Int, Int> {
+fun formatMetaCritic(metaCritic: Int?): Pair<Int, Int>? {
+    if (metaCritic == null) {
+        return null
+    }
+
     var backgroundResource = 0
     var textColor = 0
 
@@ -61,7 +65,7 @@ fun formatMetaCritic(metaCritic: Int?): Pair<Int, Int> {
             textColor = R.color.yellow
         }
 
-        in 75..101 -> {
+        in 76..101 -> {
             backgroundResource = R.drawable.bg_green_mc
             textColor = R.color.green
         }

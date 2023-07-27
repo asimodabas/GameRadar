@@ -7,9 +7,10 @@ import javax.inject.Inject
 class GameRepositoryImpl @Inject constructor(
     private val apiFactory: GameAPI
 ) : GameRepository {
-    override suspend fun getAllGames() = apiFactory.getData()
 
-    override suspend fun getGameSearch(search: String) = apiFactory.getGameSearch(search)
+    override suspend fun getAllGames(nextPage: String) = apiFactory.getAllData(nextPage)
+
+    override suspend fun getGameSearch(searchQuery: String, nextPage: String) = apiFactory.getGameSearch(searchQuery, nextPage)
 
     override suspend fun getGamePlatforms() = apiFactory.getParentPlatform()
 }

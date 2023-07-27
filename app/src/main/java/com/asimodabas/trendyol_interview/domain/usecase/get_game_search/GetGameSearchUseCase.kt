@@ -4,5 +4,5 @@ import com.asimodabas.trendyol_interview.common.NetworkCheck
 import com.asimodabas.trendyol_interview.domain.model.ui_model.GameUiModel
 
 interface GetGameSearchUseCase {
-     suspend operator fun invoke(query: String): NetworkCheck<List<GameUiModel>?>
+    suspend operator fun invoke(searchQuery: String, nextPage: String): NetworkCheck<List<GameUiModel>?>
 }
