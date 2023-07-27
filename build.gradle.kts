@@ -8,13 +8,13 @@ buildscript {
     }
     dependencies {
         // AndroidX
-        classpath("com.android.tools.build:gradle:${BuildTools.gradle}")
-        classpath("com.android.tools:${AndroidX.r8Tools}")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.kotlinCompilerVersion}")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${AndroidX.navigation}")
+        classpath(Libraries.androidBuildTools)
+        classpath(Libraries.androidR8Tools)
+        classpath(Libraries.androidGradlePlugin)
+        classpath(Libraries.androidXnavigationSafeArgs)
 
         // Dagger-Hilt
-        classpath("com.google.dagger:hilt-android-gradle-plugin:${Google.daggerHilt}")
+        classpath(Libraries.googlehiltGradlePlugin)
     }
 }
 

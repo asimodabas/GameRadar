@@ -36,23 +36,23 @@ android {
 
 dependencies {
     // AndroidX
-    implementation("androidx.security:security-crypto:${AndroidX.security}")
-    implementation("androidx.paging:paging-runtime-ktx:${AndroidX.paging}")
-    implementation("androidx.room:room-runtime:${AndroidX.room}")
-    implementation("androidx.room:room-ktx:${AndroidX.room}")
-    kapt("androidx.room:room-compiler:${AndroidX.room}")
-    implementation("androidx.hilt:hilt-work:${AndroidX.hiltWork}")
-    kapt("androidx.hilt:hilt-compiler:${AndroidX.hiltWork}")
+    implementation(Libraries.androidXsecurity)
+    implementation(Libraries.androidXpaging)
+    implementation(Libraries.androidXroomRuntime)
+    implementation(Libraries.androidXroomKtx)
+    implementation(Libraries.androidXhiltWork)
+    kapt(Libraries.androidXroomCompiler)
+    kapt(Libraries.androidXhiltCompiler)
 
     // Google
-    implementation("com.google.android.material:material:${Google.material}")
-    implementation("com.google.dagger:hilt-android:${Google.daggerHilt}")
-    kapt("com.google.dagger:hilt-android-compiler:${Google.daggerHilt}")
+    implementation(Libraries.googlematerial)
+    implementation(Libraries.googlehilt)
+    kapt(Libraries.googlehiltCompiler)
 
     // Square Up
-    implementation("com.squareup.retrofit2:retrofit:${Network.retrofit}")
-    implementation("com.squareup.retrofit2:converter-gson:${Network.retrofit}")
+    implementation(Libraries.squareupRetrofit)
+    implementation(Libraries.squareupRetrofitConverter)
 
     // Glide
-    implementation("com.github.bumptech.glide:glide:${Other.glide}")
+    implementation(Libraries.otherGlide)
 }

@@ -1,7 +1,7 @@
 package com.asimodabas.data.get_details
 
 import com.asimodabas.data.mergeWishlistUiModel
-import com.asimodabas.data.repository.GameDetailRoomRepository
+import com.asimodabas.data.repository.game_detail_room.GameDetailRoomRepository
 import com.asimodabas.data.usecase.get_details.GetDetailsUseCase
 import com.asimodabas.data.usecase.get_details.GetDetailsUseCaseImpl
 import com.asimodabas.domain.ui_model.WishlistUiModel

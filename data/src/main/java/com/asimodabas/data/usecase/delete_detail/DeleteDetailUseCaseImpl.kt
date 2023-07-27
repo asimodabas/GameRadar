@@ -1,6 +1,6 @@
 package com.asimodabas.data.usecase.delete_detail
 
-import com.asimodabas.data.repository.GameDetailRoomRepository
+import com.asimodabas.data.repository.game_detail_room.GameDetailRoomRepository
 import com.asimodabas.domain.model.DetailLocal
 import javax.inject.Inject
 

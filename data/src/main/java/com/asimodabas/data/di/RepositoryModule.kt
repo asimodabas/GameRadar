@@ -1,11 +1,11 @@
 package com.asimodabas.data.di
 
-import com.asimodabas.data.repository.GameDetailRepository
-import com.asimodabas.data.repository.GameDetailRoomRepository
-import com.asimodabas.data.repository.GameRepository
-import com.asimodabas.data.repository_impl.GameDetailRepositoryImpl
-import com.asimodabas.data.repository_impl.GameDetailRoomRepositoryImpl
-import com.asimodabas.data.repository_impl.GameRepositoryImpl
+import com.asimodabas.data.repository.game_detail.GameDetailRepository
+import com.asimodabas.data.repository.game_detail_room.GameDetailRoomRepository
+import com.asimodabas.data.repository.game.GameRepository
+import com.asimodabas.data.repository.game_detail.GameDetailRepositoryImpl
+import com.asimodabas.data.repository.game_detail_room.GameDetailRoomRepositoryImpl
+import com.asimodabas.data.repository.game.GameRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

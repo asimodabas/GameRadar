@@ -4,7 +4,7 @@ import com.asimodabas.domain.common.NetworkCheck
 import com.asimodabas.domain.common.safeApiRequest
 import com.asimodabas.data.mapper.game.GameMapper
 import com.asimodabas.domain.ui_model.GameUiModel
-import com.asimodabas.data.repository.GameRepository
+import com.asimodabas.data.repository.game.GameRepository
 import javax.inject.Inject
 
 class GetGameSearchUseCaseImpl @Inject constructor(

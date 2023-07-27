@@ -1,7 +1,7 @@
 package com.asimodabas.data.get_game_detail
 
 import com.asimodabas.data.firstDetailShow
-import com.asimodabas.data.repository.GameDetailRepository
+import com.asimodabas.data.repository.game_detail.GameDetailRepository
 import com.asimodabas.data.usecase.get_game_detail.GetGameDetailUseCase
 import com.asimodabas.data.usecase.get_game_detail.GetGameDetailUseCaseImpl
 import com.asimodabas.domain.common.NetworkCheck

@@ -1,6 +1,6 @@
     package com.asimodabas.data.insert_details
 
-import com.asimodabas.data.repository.GameDetailRoomRepository
+import com.asimodabas.data.repository.game_detail_room.GameDetailRoomRepository
 import com.asimodabas.data.topDetailLocal
 import com.asimodabas.data.usecase.insert_details.InsertDetailsUseCaseImpl
 import kotlinx.coroutines.runBlocking

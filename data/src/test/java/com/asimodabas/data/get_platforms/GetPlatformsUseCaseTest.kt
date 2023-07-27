@@ -1,7 +1,7 @@
 package com.asimodabas.data.get_platforms
 
 import com.asimodabas.data.mapper.platform.PlatformMapper
-import com.asimodabas.data.repository.GameRepository
+import com.asimodabas.data.repository.game.GameRepository
 import com.asimodabas.data.usecase.get_platforms.GetPlatformsUseCase
 import com.asimodabas.data.usecase.get_platforms.GetPlatformsUseCaseImpl
 import com.asimodabas.domain.common.NetworkCheck

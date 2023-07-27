@@ -1,4 +1,4 @@
-package com.asimodabas.data.repository
+package com.asimodabas.data.repository.game_detail_room
 
 import com.asimodabas.domain.model.DetailLocal
 import com.asimodabas.domain.ui_model.WishlistUiModel

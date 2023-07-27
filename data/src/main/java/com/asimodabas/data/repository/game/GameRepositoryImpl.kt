@@ -1,6 +1,5 @@
-package com.asimodabas.data.repository_impl
+package com.asimodabas.data.repository.game
 
-import com.asimodabas.data.repository.GameRepository
 import com.asimodabas.data.service.GameAPI
 import javax.inject.Inject
 

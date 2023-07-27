@@ -1,4 +1,4 @@
-package com.asimodabas.data.repository
+package com.asimodabas.data.repository.game
 
 import com.asimodabas.data.dto.GameDTO
 import com.asimodabas.data.dto.PlatformDTO

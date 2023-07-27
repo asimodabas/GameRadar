@@ -1,4 +1,4 @@
-package com.asimodabas.data.repository
+package com.asimodabas.data.repository.game_detail
 
 import com.asimodabas.domain.common.NetworkCheck
 import com.asimodabas.domain.model.Detail

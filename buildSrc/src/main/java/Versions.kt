@@ -17,7 +17,7 @@ object Kotlin {
     const val coroutines = "1.6.2"
 }
 
-object Test {
+object AndroidTest {
     const val mockk = "1.13.5"
     const val junit = "4.13.2"
     const val mockito = "5.4.0"
@@ -62,4 +62,10 @@ object Network {
 object Other {
     const val glide = "4.14.2"
     const val okhttp3 = "5.0.0-alpha.5"
+}
+
+object otherModule {
+    const val domain = ":domain"
+    const val data = ":data"
+    const val presentation = ":presentation"
 }

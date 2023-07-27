@@ -34,42 +34,41 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
+    implementation(project(otherModule.domain))
 
     // AndroidX
-    implementation("androidx.core:core-ktx:${AndroidX.core}")
-    implementation("androidx.appcompat:appcompat:${AndroidX.appcompat}")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${AndroidX.lifecycleRuntime}")
-    implementation("androidx.work:work-runtime-ktx:${AndroidX.workRuntime}")
-    implementation("androidx.startup:startup-runtime:${AndroidX.startupRuntime}")
-    implementation("androidx.hilt:hilt-work:${AndroidX.hiltWork}")
-    implementation("androidx.room:room-runtime:${AndroidX.room}")
-    implementation("androidx.security:security-crypto:${AndroidX.security}")
-    implementation("androidx.paging:paging-runtime-ktx:${AndroidX.paging}")
-    implementation("androidx.room:room-ktx:${AndroidX.room}")
-    kapt("androidx.room:room-compiler:${AndroidX.room}")
-    kapt("androidx.hilt:hilt-compiler:${AndroidX.hiltWork}")
+    implementation(Libraries.androidXcore)
+    implementation(Libraries.androidXappCompat)
+    implementation(Libraries.androidXlifecycle)
+    implementation(Libraries.androidXworkRuntime)
+    implementation(Libraries.androidXstartUpRuntime)
+    implementation(Libraries.androidXhiltWork)
+    implementation(Libraries.androidXroomRuntime)
+    implementation(Libraries.androidXroomKtx)
+    implementation(Libraries.androidXsecurity)
+    implementation(Libraries.androidXpaging)
+    kapt(Libraries.androidXroomCompiler)
+    kapt(Libraries.androidXhiltCompiler)
 
     // Google
-    implementation("com.google.android.material:material:${Google.material}")
-    implementation("com.google.dagger:hilt-android:${Google.daggerHilt}")
-    kapt("com.google.dagger:hilt-android-compiler:${Google.daggerHilt}")
+    implementation(Libraries.googlematerial)
+    implementation(Libraries.googlehilt)
+    kapt(Libraries.googlehiltCompiler)
 
     // Square Up
-    implementation("com.squareup.retrofit2:retrofit:${Network.retrofit}")
-    implementation("com.squareup.retrofit2:converter-gson:${Network.retrofit}")
+    implementation(Libraries.squareupRetrofit)
+    implementation(Libraries.squareupRetrofitConverter)
+    implementation(Libraries.squareupOkhttp)
+    implementation(Libraries.squareupOkhttpInterceptor)
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Kotlin.coroutines}")
+    implementation(Libraries.coroutinesKotlinx)
 
-    //OkHttp
-    implementation("com.squareup.okhttp3:okhttp:${Other.okhttp3}")
-    implementation("com.squareup.okhttp3:logging-interceptor:${Other.okhttp3}")
-
-    testImplementation("io.mockk:mockk:${Test.mockk}")
-    testImplementation("junit:junit:${Test.junit}")
-    testImplementation("org.mockito:mockito-core:${Test.mockito}")
-    testImplementation("com.google.truth:truth:${Test.truth}")
-    testImplementation("androidx.arch.core:core-testing:${Test.arch}")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Test.coroutines}")
+    // Test
+    testImplementation(Libraries.androidTestMockk)
+    testImplementation(Libraries.androidTestJunit)
+    testImplementation(Libraries.androidTestMockito)
+    testImplementation(Libraries.androidTestTruth)
+    testImplementation(Libraries.androidTestArch)
+    testImplementation(Libraries.androidTestCoroutines)
 }

@@ -38,20 +38,20 @@ android {
 }
 
 dependencies {
-    implementation(project(":presentation"))
+    implementation(project(otherModule.presentation))
 
     // AndroidX
-    implementation("androidx.core:core-ktx:${AndroidX.core}")
-    implementation("androidx.appcompat:appcompat:${AndroidX.appcompat}")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${AndroidX.lifecycleRuntime}")
-    implementation("androidx.work:work-runtime-ktx:${AndroidX.workRuntime}")
-    implementation("androidx.startup:startup-runtime:${AndroidX.startupRuntime}")
-    implementation("androidx.constraintlayout:constraintlayout:${AndroidX.constraintLayout}")
-    implementation("androidx.navigation:navigation-fragment-ktx:${AndroidX.navigation}")
-    implementation("androidx.navigation:navigation-ui-ktx:${AndroidX.navigation}")
-    implementation("androidx.hilt:hilt-work:${AndroidX.hiltWork}")
+    implementation(Libraries.androidXcore)
+    implementation(Libraries.androidXappCompat)
+    implementation(Libraries.androidXlifecycle)
+    implementation(Libraries.androidXworkRuntime)
+    implementation(Libraries.androidXstartUpRuntime)
+    implementation(Libraries.androidXconstraintLayout)
+    implementation(Libraries.androidXnavigation)
+    implementation(Libraries.androidXnavigationUiKtx)
+    implementation(Libraries.androidXhiltWork)
 
     // Google
-    implementation("com.google.dagger:hilt-android:${Google.daggerHilt}")
-    kapt("com.google.dagger:hilt-android-compiler:${Google.daggerHilt}")
+    implementation(Libraries.googlehilt)
+    kapt(Libraries.googlehiltCompiler)
 }

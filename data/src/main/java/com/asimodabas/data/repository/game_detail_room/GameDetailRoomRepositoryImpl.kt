@@ -1,6 +1,5 @@
-package com.asimodabas.data.repository_impl
+package com.asimodabas.data.repository.game_detail_room
 
-import com.asimodabas.data.repository.GameDetailRoomRepository
 import com.asimodabas.data.room.GameDAO
 import com.asimodabas.domain.model.DetailLocal
 import kotlinx.coroutines.Dispatchers

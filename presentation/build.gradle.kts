@@ -36,34 +36,35 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":data"))
+    implementation(project(otherModule.domain))
+    implementation(project(otherModule.data))
 
     // AndroidX
-    implementation("androidx.core:core-ktx:${AndroidX.core}")
-    implementation("androidx.appcompat:appcompat:${AndroidX.appcompat}")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${AndroidX.lifecycleRuntime}")
-    implementation("androidx.work:work-runtime-ktx:${AndroidX.workRuntime}")
-    implementation("androidx.startup:startup-runtime:${AndroidX.startupRuntime}")
-    implementation("androidx.hilt:hilt-work:${AndroidX.hiltWork}")
-    implementation("androidx.constraintlayout:constraintlayout:${AndroidX.constraintLayout}")
-    implementation("androidx.navigation:navigation-fragment-ktx:${AndroidX.navigation}")
-    implementation("androidx.navigation:navigation-ui-ktx:${AndroidX.navigation}")
-    implementation("androidx.security:security-crypto:${AndroidX.security}")
-    implementation("androidx.paging:paging-runtime-ktx:${AndroidX.paging}")
-    kapt("androidx.hilt:hilt-compiler:${AndroidX.hiltWork}")
+    implementation(Libraries.androidXcore)
+    implementation(Libraries.androidXappCompat)
+    implementation(Libraries.androidXlifecycle)
+    implementation(Libraries.androidXworkRuntime)
+    implementation(Libraries.androidXstartUpRuntime)
+    implementation(Libraries.androidXhiltWork)
+    implementation(Libraries.androidXconstraintLayout)
+    implementation(Libraries.androidXnavigation)
+    implementation(Libraries.androidXnavigationUiKtx)
+    implementation(Libraries.androidXsecurity)
+    implementation(Libraries.androidXpaging)
+    kapt(Libraries.androidXhiltCompiler)
 
     // Google
-    implementation("com.google.dagger:hilt-android:${Google.daggerHilt}")
-    kapt("com.google.dagger:hilt-android-compiler:${Google.daggerHilt}")
+    implementation(Libraries.googlehilt)
+    kapt(Libraries.googlehiltCompiler)
 
     // Glide
-    implementation("com.github.bumptech.glide:glide:${Other.glide}")
+    implementation(Libraries.otherGlide)
 
-    testImplementation("io.mockk:mockk:${Test.mockk}")
-    testImplementation("junit:junit:${Test.junit}")
-    testImplementation("org.mockito:mockito-core:${Test.mockito}")
-    testImplementation("com.google.truth:truth:${Test.truth}")
-    testImplementation("androidx.arch.core:core-testing:${Test.arch}")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Test.coroutines}")
+    // Test
+    testImplementation(Libraries.androidTestMockk)
+    testImplementation(Libraries.androidTestJunit)
+    testImplementation(Libraries.androidTestMockito)
+    testImplementation(Libraries.androidTestTruth)
+    testImplementation(Libraries.androidTestArch)
+    testImplementation(Libraries.androidTestCoroutines)
 }

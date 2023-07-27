@@ -4,7 +4,7 @@ import com.asimodabas.domain.common.NetworkCheck
 import com.asimodabas.domain.common.safeApiRequest
 import com.asimodabas.data.mapper.platform.PlatformMapper
 import com.asimodabas.domain.ui_model.PlatformUiModel
-import com.asimodabas.data.repository.GameRepository
+import com.asimodabas.data.repository.game.GameRepository
 import javax.inject.Inject
 
 class GetPlatformsUseCaseImpl @Inject constructor(
