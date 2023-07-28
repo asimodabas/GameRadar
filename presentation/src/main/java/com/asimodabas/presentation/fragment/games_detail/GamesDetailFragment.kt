@@ -10,8 +10,8 @@ import com.asimodabas.domain.common.getUrl
 import com.asimodabas.domain.common.viewBinding
 import com.asimodabas.presentation.R
 import com.asimodabas.presentation.databinding.FragmentGamesDetailBinding
-import com.asimodabas.presentation.fragment.games_detail.view.binder.bind
 import com.asimodabas.presentation.formatWishlist
+import com.asimodabas.presentation.fragment.games_detail.view.binder.bind
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,12 +1,12 @@
 package com.asimodabas.data.service
 
+import com.asimodabas.data.Constants.API_GAMES
+import com.asimodabas.data.Constants.API_GAMES_ID
+import com.asimodabas.data.Constants.API_KEY
+import com.asimodabas.data.Constants.API_PLATFORMS
 import com.asimodabas.data.dto.GameDTO
 import com.asimodabas.data.dto.PlatformDTO
-import com.asimodabas.domain.common.Constants.API_GAMES
-import com.asimodabas.domain.common.Constants.API_GAMES_ID
-import com.asimodabas.domain.common.Constants.API_KEY
-import com.asimodabas.domain.common.Constants.API_PLATFORMS
-import com.asimodabas.domain.model.Detail
+import com.asimodabas.data.model.Detail
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

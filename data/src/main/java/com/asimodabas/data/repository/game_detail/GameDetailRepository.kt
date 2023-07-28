@@ -1,8 +1,7 @@
 package com.asimodabas.data.repository.game_detail
 
-import com.asimodabas.domain.common.NetworkCheck
-import com.asimodabas.domain.model.Detail
+import com.asimodabas.data.model.Detail
 
 interface GameDetailRepository {
-    suspend fun getGameDetail(id: Int): NetworkCheck<Detail>
+    suspend fun getGameDetail(id: Int): Detail
 }

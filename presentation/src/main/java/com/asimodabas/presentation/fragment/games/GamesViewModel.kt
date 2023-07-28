@@ -8,10 +8,10 @@ import androidx.paging.cachedIn
 import com.asimodabas.domain.common.NetworkCheck
 import com.asimodabas.domain.state.DetailState
 import com.asimodabas.domain.state.GameState
-import com.asimodabas.data.usecase.get_all_games.GetAllGamesPagerUseCase
-import com.asimodabas.data.usecase.get_game_search.GetGameSearchPagerUseCase
-import com.asimodabas.data.usecase.get_game_search.GetGameSearchUseCase
-import com.asimodabas.data.usecase.get_platforms.GetPlatformsUseCase
+import com.asimodabas.domain.usecase.get_all_games.GetAllGamesPagerUseCase
+import com.asimodabas.domain.usecase.get_game_search.GetGameSearchPagerUseCase
+import com.asimodabas.domain.usecase.get_game_search.GetGameSearchUseCase
+import com.asimodabas.domain.usecase.get_platforms.GetPlatformsUseCase
 import com.asimodabas.presentation.fragment.games.view.PlatformItemViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

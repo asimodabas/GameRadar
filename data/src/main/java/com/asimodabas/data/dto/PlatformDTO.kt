@@ -1,6 +1,6 @@
 package com.asimodabas.data.dto
 
-import com.asimodabas.domain.model.Platform
+import com.asimodabas.data.model.Platform
 import com.google.gson.annotations.SerializedName
 
 data class PlatformDTO(

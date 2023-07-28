@@ -35,6 +35,8 @@ android {
 }
 
 dependencies {
+    implementation(project(otherModule.data))
+
     // AndroidX
     implementation(Libraries.androidXsecurity)
     implementation(Libraries.androidXpaging)

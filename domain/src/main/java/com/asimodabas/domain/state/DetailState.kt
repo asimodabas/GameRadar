@@ -1,8 +1,8 @@
 package com.asimodabas.domain.state
 
-import com.asimodabas.domain.model.Detail
+import com.asimodabas.domain.ui_model.DetailUiModel
 
 data class DetailState(
-    val success: Detail? = null,
+    val success: DetailUiModel? = null,
     val error: String? = null
 )

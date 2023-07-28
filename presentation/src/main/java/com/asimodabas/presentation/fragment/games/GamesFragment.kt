@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.asimodabas.domain.common.Constants.GAMES_RV_GRID_COUNT
 import com.asimodabas.domain.common.viewBinding
 import com.asimodabas.presentation.R
 import com.asimodabas.presentation.databinding.FragmentGamesBinding
@@ -96,7 +95,7 @@ class GamesFragment : Fragment(R.layout.fragment_games) {
         gamesRV.apply {
             gamesRecyclerAdapter = GamesRecyclerAdapter(findNavController())
             adapter = gamesRecyclerAdapter
-            layoutManager = GridLayoutManager(requireContext(), GAMES_RV_GRID_COUNT)
+            layoutManager = GridLayoutManager(requireContext(), 2)
             setHasFixedSize(true)
             clipToPadding = false
         }

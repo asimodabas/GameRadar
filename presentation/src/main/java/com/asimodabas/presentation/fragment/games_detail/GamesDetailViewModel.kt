@@ -5,14 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.asimodabas.data.mapper.detail_local.DetailLocalMapper
 import com.asimodabas.domain.common.NetworkCheck
 import com.asimodabas.domain.state.DetailState
-import com.asimodabas.domain.model.Detail
-import com.asimodabas.domain.model.DetailLocal
-import com.asimodabas.data.usecase.delete_detail.DeleteDetailUseCase
-import com.asimodabas.data.usecase.get_game_detail.GetGameDetailUseCase
-import com.asimodabas.data.usecase.insert_details.InsertDetailsUseCase
+import com.asimodabas.domain.ui_model.DetailUiModel
+import com.asimodabas.domain.usecase.delete_detail.DeleteDetailUseCase
+import com.asimodabas.domain.usecase.get_game_detail.GetGameDetailUseCase
+import com.asimodabas.domain.usecase.insert_details.InsertDetailsUseCase
 import com.asimodabas.presentation.fragment.games_detail.view.state.GamesDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,7 +21,6 @@ class GamesDetailViewModel @Inject constructor(
     private val getGameDetailUseCase: GetGameDetailUseCase,
     private val insertDetailsUseCase: InsertDetailsUseCase,
     private val deleteDetailUseCase: DeleteDetailUseCase,
-    private val detailLocalMapper: DetailLocalMapper,
     private var sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
@@ -51,7 +48,7 @@ class GamesDetailViewModel @Inject constructor(
         }
     }
 
-    fun checkWishlist(detail: Detail) = viewModelScope.launch {
+    fun checkWishlist(detail: DetailUiModel) = viewModelScope.launch {
         if (sharedPreferences.getBoolean(detail.name, false)) {
 
             _wishlistState.postValue(true)
@@ -63,27 +60,26 @@ class GamesDetailViewModel @Inject constructor(
         }
     }
 
-    fun wishlistClickButton(detail: Detail) = viewModelScope.launch {
-        val detailLocal = detailLocalMapper.map(detail)
-        if (detailLocal.wishlist) {
-            detailLocal.wishlist = false
+    fun wishlistClickButton(detail: DetailUiModel) = viewModelScope.launch {
+        if (detail.wishlist) {
+            detail.wishlist = false
             _wishlistState.postValue(false)
-            deleteWishList(detailLocal)
-            sharedPreferences.edit().remove(detailLocal.name).apply()
+            deleteWishList(detail)
+            sharedPreferences.edit().remove(detail.name).apply()
 
         } else {
-            detailLocal.wishlist = true
+            detail.wishlist = true
             _wishlistState.postValue(true)
-            addWishList(detailLocal)
-            sharedPreferences.edit().putBoolean(detailLocal.name, true).apply()
+            addWishList(detail)
+            sharedPreferences.edit().putBoolean(detail.name, true).apply()
         }
     }
 
-    private fun addWishList(detail: DetailLocal) = viewModelScope.launch {
+    private fun addWishList(detail: DetailUiModel) = viewModelScope.launch {
         insertDetailsUseCase.invoke(detail)
     }
 
-    private fun deleteWishList(detail: DetailLocal) = viewModelScope.launch {
+    private fun deleteWishList(detail: DetailUiModel) = viewModelScope.launch {
         deleteDetailUseCase.invoke(detail)
     }
 }

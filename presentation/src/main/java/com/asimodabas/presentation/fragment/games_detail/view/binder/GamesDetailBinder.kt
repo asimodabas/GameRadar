@@ -1,6 +1,5 @@
 package com.asimodabas.presentation.fragment.games_detail.view.binder
 
-import com.asimodabas.domain.common.Constants.DESCRIPTION_MAX_COUNT
 import com.asimodabas.domain.common.loadUrl
 import com.asimodabas.domain.common.makeCollapsible
 import com.asimodabas.presentation.databinding.FragmentGamesDetailBinding
@@ -21,7 +20,7 @@ fun FragmentGamesDetailBinding.bind(
     ivImageInfo.loadUrl(state.data.imageUrl.toString())
 
     customViewDescriptions.binding.apply {
-        tvDescription.makeCollapsible(DESCRIPTION_MAX_COUNT, Int.MAX_VALUE)
+        tvDescription.makeCollapsible(4, Int.MAX_VALUE)
         tvDescription.text = state.getDescriptionTextView()
         tvDescription.visibility = state.getDescriptionIsVisible()
     }

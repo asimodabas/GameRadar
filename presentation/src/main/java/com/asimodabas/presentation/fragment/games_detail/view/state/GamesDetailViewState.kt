@@ -4,12 +4,13 @@ import android.content.Context
 import android.text.Html
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.asimodabas.domain.model.Detail
+import com.asimodabas.domain.ui_model.DetailUiModel
+
 import com.asimodabas.presentation.R
 import com.asimodabas.presentation.formatMetacritic
 
 data class GamesDetailViewState(
-    var data: Detail
+    var data: DetailUiModel
 ) {
     fun publisherIsVisible(): Int {
         return if (data.publishers.isNullOrEmpty()) {
@@ -120,9 +121,7 @@ data class GamesDetailViewState(
 
     fun getRedditTextView(context: Context): String = context.getString(R.string.visit_reddit)
 
-    fun getPublisherTextView(): String =
-        data.publishers?.joinToString(separator = ", ") { it.name.toString() } ?: ""
+    fun getPublisherTextView(): String = data.publishers.joinToString(separator = ", ") { it.name.toString() } ?: ""
 
-    fun getGenreTextView(): String =
-        data.genres?.joinToString(separator = ", ") { it.name.toString() } ?: ""
+    fun getGenreTextView(): String = data.genres.joinToString(separator = ", ") { it.name.toString() } ?: ""
 }

@@ -34,8 +34,6 @@ android {
 }
 
 dependencies {
-    implementation(project(otherModule.domain))
-
     // AndroidX
     implementation(Libraries.androidXcore)
     implementation(Libraries.androidXappCompat)

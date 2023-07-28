@@ -7,25 +7,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.asimodabas.domain.common.loadUrl
-import com.asimodabas.domain.ui_model.WishlistUiModel
+import com.asimodabas.domain.ui_model.DetailUiModel
 import com.asimodabas.presentation.databinding.LayoutWishlistRowBinding
 import com.asimodabas.presentation.fragment.wishlist.WishlistFragmentDirections
 
 class WishlistRecyclerAdapter(
     private val navController: NavController
-) : ListAdapter<WishlistUiModel, WishlistRecyclerAdapter.GameViewHolder>(DiffCallback) {
+) : ListAdapter<DetailUiModel, WishlistRecyclerAdapter.GameViewHolder>(DiffCallback) {
 
     class GameViewHolder(
         private val binding: LayoutWishlistRowBinding,
         private val navController: NavController
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(detail: WishlistUiModel) {
+        fun bind(detail: DetailUiModel) {
             with(binding) {
                 tvWishlistName.text = detail.name
                 tvReleased.text = detail.released
                 tvMetacritic.text = detail.metacritic.toString()
-                ivWishlist.loadUrl(detail.background_image.toString())
+                ivWishlist.loadUrl(detail.imageUrl.toString())
                 root.setOnClickListener {
                     navController.navigate(
                         WishlistFragmentDirections.actionWishlistFragmentToGamesDetailFragment(
@@ -37,15 +37,15 @@ class WishlistRecyclerAdapter(
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<WishlistUiModel>() {
-        override fun areItemsTheSame(oldItem: WishlistUiModel, newItem: WishlistUiModel): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<DetailUiModel>() {
+        override fun areItemsTheSame(oldItem: DetailUiModel, newItem: DetailUiModel): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: WishlistUiModel, newItem: WishlistUiModel
+            oldItem: DetailUiModel, newItem: DetailUiModel
         ): Boolean {
-            return oldItem == newItem
+            return oldItem.imageUrl == newItem.imageUrl
         }
     }
 
