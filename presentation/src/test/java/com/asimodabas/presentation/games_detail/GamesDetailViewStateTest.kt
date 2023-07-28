@@ -1,10 +1,10 @@
 package com.asimodabas.presentation.games_detail
 
 import android.view.View
-import com.asimodabas.presentation.firstDetailShow
+import com.asimodabas.presentation.firstDetailUiModel
 import com.asimodabas.presentation.formatMetacritic
 import com.asimodabas.presentation.fragment.games_detail.view.state.GamesDetailViewState
-import com.asimodabas.presentation.secondDetailShow
+import com.asimodabas.presentation.secondDetailUiModel
 import com.google.common.truth.Truth
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -15,7 +15,7 @@ class GamesDetailViewStateTest {
     fun `Given tvShow When tvShowName checked Then TvShowName should match Given tvShowName`() {
 
         // Given
-        val tvShow = firstDetailShow()
+        val tvShow = firstDetailUiModel()
         val givenViewState = GamesDetailViewState(tvShow)
 
         // When
@@ -29,7 +29,7 @@ class GamesDetailViewStateTest {
     fun `given a tv show, when the tv show released is checked, then it should match the given tv show released`() {
 
         // Given
-        val tvShow = firstDetailShow()
+        val tvShow = firstDetailUiModel()
         val givenViewState = GamesDetailViewState(tvShow)
 
         // When
@@ -43,7 +43,7 @@ class GamesDetailViewStateTest {
     fun `given a tv show, when the tv show playtime is checked, then it should match the given tv show playtime`() {
 
         // Given
-        val tvShow = firstDetailShow()
+        val tvShow = firstDetailUiModel()
         val givenViewState = GamesDetailViewState(tvShow)
 
         // When
@@ -56,7 +56,7 @@ class GamesDetailViewStateTest {
     @Test
     fun `given a name, when the name is checked, then it should return VISIBLE if the name is not null or empty`() {
         // Given
-        val state = GamesDetailViewState(firstDetailShow())
+        val state = GamesDetailViewState(firstDetailUiModel())
 
         // When
         val result = state.getGameNameIsVisible()
@@ -68,7 +68,7 @@ class GamesDetailViewStateTest {
     @Test
     fun `given a released, when the released is checked, then it should return VISIBLE if the released is not null or empty`() {
         // Given
-        val state = GamesDetailViewState(firstDetailShow())
+        val state = GamesDetailViewState(firstDetailUiModel())
 
         // When
         val result = state.getReleasedIsVisible()
@@ -80,7 +80,7 @@ class GamesDetailViewStateTest {
     @Test
     fun `given a playtime, when the playtime is checked, then it should return VISIBLE if the playtime is not null or empty`() {
         // Given
-        val state = GamesDetailViewState(firstDetailShow())
+        val state = GamesDetailViewState(firstDetailUiModel())
 
         // When
         val result = state.getPlaytimeIsVisible()
@@ -92,7 +92,7 @@ class GamesDetailViewStateTest {
     @Test
     fun `given a description, when the description is checked, then it should return VISIBLE if the description is not null or empty`() {
         // Given
-        val state = GamesDetailViewState(firstDetailShow())
+        val state = GamesDetailViewState(firstDetailUiModel())
 
         // When
         val result = state.getDescriptionIsVisible()
@@ -104,7 +104,7 @@ class GamesDetailViewStateTest {
     @Test
     fun `given a redditUrl, when the redditUrl is checked, then it should return VISIBLE if the redditUrl is not null or empty`() {
         // Given
-        val state = GamesDetailViewState(firstDetailShow())
+        val state = GamesDetailViewState(firstDetailUiModel())
 
         // When
         val result = state.getRedditIsVisible()
@@ -116,7 +116,7 @@ class GamesDetailViewStateTest {
     @Test
     fun `given a website, when the website is checked, then it should return VISIBLE if the website is not null or empty`() {
         // Given
-        val state = GamesDetailViewState(firstDetailShow())
+        val state = GamesDetailViewState(firstDetailUiModel())
 
         // When
         val result = state.getWebsiteIsVisible()
@@ -128,7 +128,7 @@ class GamesDetailViewStateTest {
     @Test
     fun `given a genres, when the genres is checked, then it should return VISIBLE if the genres is not null or empty`() {
         // Given
-        val state = GamesDetailViewState(firstDetailShow())
+        val state = GamesDetailViewState(firstDetailUiModel())
 
         // When
         val result = state.genreIsVisible()
@@ -140,7 +140,7 @@ class GamesDetailViewStateTest {
     @Test
     fun `given a publisher, when the publisher is checked, then it should return VISIBLE if the publisher is not null or empty`() {
         // Given
-        val state = GamesDetailViewState(firstDetailShow())
+        val state = GamesDetailViewState(firstDetailUiModel())
 
         // When
         val result = state.publisherIsVisible()
@@ -152,7 +152,7 @@ class GamesDetailViewStateTest {
     @Test
     fun `given a metacritic, when the metacritic is checked, then it should return VISIBLE if the metacritic is not null or empty`() {
         // Given
-        val state = GamesDetailViewState(firstDetailShow())
+        val state = GamesDetailViewState(firstDetailUiModel())
 
         // When
         val result = state.getMetacriticIsVisible()
@@ -163,8 +163,8 @@ class GamesDetailViewStateTest {
 
     @Test
     fun `given a metacritic value when getMetacriticTextViewBackground function is called, then it should return the correct background resource ID`() {
-        val data1 = firstDetailShow()
-        val data2 = secondDetailShow()
+        val data1 = firstDetailUiModel()
+        val data2 = secondDetailUiModel()
         val state1 = GamesDetailViewState(data1)
         val state2 = GamesDetailViewState(data2)
 
@@ -179,19 +179,19 @@ class GamesDetailViewStateTest {
 
     @Test
     fun `given a detail with publishers, when getPublisherTextView function is called, then it should return comma-separated publisher names`() {
-        val data = firstDetailShow()
+        val data = firstDetailUiModel()
         val state = GamesDetailViewState(data)
 
-        val expected = data.publishers?.joinToString(separator = ", ") { it.name.toString() } ?: ""
+        val expected = data.publishers.joinToString(separator = ", ") { it.name.toString() }
         assertEquals(expected, state.getPublisherTextView())
     }
 
     @Test
     fun `given a detail with genres, when getGenreTextView function is called, then it should return comma-separated genre names`() {
-        val data = firstDetailShow()
+        val data = firstDetailUiModel()
         val state = GamesDetailViewState(data)
 
-        val expected = data.genres?.joinToString(separator = ", ") { it.name.toString() } ?: ""
+        val expected = data.genres.joinToString(separator = ", ") { it.name.toString() }
         assertEquals(expected, state.getGenreTextView())
     }
 }

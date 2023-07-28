@@ -1,11 +1,11 @@
-package com.asimodabas.data.get_all_games
+package com.asimodabas.domain.use_case.get_all_games
 
-import com.asimodabas.data.mapper.game.GameMapper
-import com.asimodabas.data.mergeGameUiModel
 import com.asimodabas.data.repository.game.GameRepository
-import com.asimodabas.data.topGameDTO
-import com.asimodabas.data.usecase.get_all_games.GetAllGamesUseCase
-import com.asimodabas.data.usecase.get_all_games.GetAllGamesUseCaseImpl
+import com.asimodabas.domain.mapper.game.GameMapper
+import com.asimodabas.domain.mergeGameUiModel
+import com.asimodabas.domain.topGameDTO
+import com.asimodabas.domain.usecase.get_all_games.GetAllGamesUseCase
+import com.asimodabas.domain.usecase.get_all_games.GetAllGamesUseCaseImpl
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals

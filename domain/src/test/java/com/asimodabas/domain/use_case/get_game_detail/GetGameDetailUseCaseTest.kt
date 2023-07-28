@@ -1,10 +1,12 @@
-package com.asimodabas.data.get_game_detail
+package com.asimodabas.domain.use_case.get_game_detail
 
-import com.asimodabas.data.firstDetailShow
 import com.asimodabas.data.repository.game_detail.GameDetailRepository
-import com.asimodabas.data.usecase.get_game_detail.GetGameDetailUseCase
-import com.asimodabas.data.usecase.get_game_detail.GetGameDetailUseCaseImpl
 import com.asimodabas.domain.common.NetworkCheck
+import com.asimodabas.domain.firstDetailShow
+import com.asimodabas.domain.firstDetailUiShow
+import com.asimodabas.domain.mapper.detail.DetailUiMapper
+import com.asimodabas.domain.usecase.get_game_detail.GetGameDetailUseCase
+import com.asimodabas.domain.usecase.get_game_detail.GetGameDetailUseCaseImpl
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -19,12 +21,15 @@ class GetGameDetailUseCaseTest {
     private lateinit var getGameDetailUseCase: GetGameDetailUseCase
 
     @Mock
-    lateinit var gameDetailRepository: GameDetailRepository
+    private lateinit var gameDetailRepository: GameDetailRepository
+
+    @Mock
+    private lateinit var detailUiMapper: DetailUiMapper
 
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
-        getGameDetailUseCase = GetGameDetailUseCaseImpl(gameDetailRepository)
+        getGameDetailUseCase = GetGameDetailUseCaseImpl(gameDetailRepository, detailUiMapper)
     }
 
     @Test
@@ -32,10 +37,14 @@ class GetGameDetailUseCaseTest {
         // Given - Mocked data
         val mockedId = 1
         val mockedDetail = firstDetailShow()
+        val expectedDetailUiModel = firstDetailUiShow()
 
         // Mock the repository function to return the mocked data
         Mockito.`when`(gameDetailRepository.getGameDetail(mockedId))
-            .thenReturn(NetworkCheck.Success(mockedDetail))
+            .thenReturn(mockedDetail)
+
+        // Mock the mapper function to map Detail to DetailUiModel
+        Mockito.`when`(detailUiMapper.map(mockedDetail)).thenReturn(expectedDetailUiModel)
 
         // When
         val result = getGameDetailUseCase(mockedId)
@@ -43,7 +52,7 @@ class GetGameDetailUseCaseTest {
         // Then - Assert that the result is NetworkCheck.Success with the mocked data
         assertTrue(result is NetworkCheck.Success)
         assertEquals(
-            mockedDetail,
+            expectedDetailUiModel,
             (result as NetworkCheck.Success).data
         )
     }

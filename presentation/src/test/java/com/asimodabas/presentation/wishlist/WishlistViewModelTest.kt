@@ -1,10 +1,10 @@
 package com.asimodabas.presentation.wishlist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.asimodabas.data.usecase.get_details.GetDetailsUseCase
 import com.asimodabas.domain.state.WishlistState
+import com.asimodabas.domain.usecase.get_details.GetDetailsUseCase
 import com.asimodabas.presentation.fragment.wishlist.WishlistViewModel
-import com.asimodabas.presentation.mergeWishlistUiModel
+import com.asimodabas.presentation.mergeDetailUiModel
 import com.asimodabas.presentation.observedValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -53,7 +53,7 @@ class WishlistViewModelTest {
     @Test
     fun `given a user with a wishlist containing multiple items, when the GetWishlist function is called, then ensure that all items in the wishlist are retrieved success`() =
         runTest {
-            val wishlistItems = mergeWishlistUiModel
+            val wishlistItems = mergeDetailUiModel
 
             // Set up the mock behavior for the use case
             `when`(getDetailsUseCase.invoke()).thenReturn(wishlistItems)

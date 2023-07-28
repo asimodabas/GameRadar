@@ -121,7 +121,7 @@ data class GamesDetailViewState(
 
     fun getRedditTextView(context: Context): String = context.getString(R.string.visit_reddit)
 
-    fun getPublisherTextView(): String = data.publishers.joinToString(separator = ", ") { it.name.toString() } ?: ""
+    fun getPublisherTextView(): String = data.publishers.joinToString(separator = ", ") { it.name.toString() }
 
-    fun getGenreTextView(): String = data.genres.joinToString(separator = ", ") { it.name.toString() } ?: ""
+    fun getGenreTextView(): String = data.genres.joinToString(separator = ", ") { it.name.toString() }
 }

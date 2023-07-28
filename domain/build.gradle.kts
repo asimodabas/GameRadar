@@ -57,4 +57,12 @@ dependencies {
 
     // Glide
     implementation(Libraries.otherGlide)
+
+    // Test
+    testImplementation(Libraries.androidTestMockk)
+    testImplementation(Libraries.androidTestJunit)
+    testImplementation(Libraries.androidTestMockito)
+    testImplementation(Libraries.androidTestTruth)
+    testImplementation(Libraries.androidTestArch)
+    testImplementation(Libraries.androidTestCoroutines)
 }

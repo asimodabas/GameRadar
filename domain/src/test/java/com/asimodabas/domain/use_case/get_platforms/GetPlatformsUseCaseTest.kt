@@ -1,10 +1,10 @@
-package com.asimodabas.data.get_platforms
+package com.asimodabas.domain.use_case.get_platforms
 
-import com.asimodabas.data.mapper.platform.PlatformMapper
 import com.asimodabas.data.repository.game.GameRepository
-import com.asimodabas.data.usecase.get_platforms.GetPlatformsUseCase
-import com.asimodabas.data.usecase.get_platforms.GetPlatformsUseCaseImpl
 import com.asimodabas.domain.common.NetworkCheck
+import com.asimodabas.domain.mapper.platform.PlatformMapper
+import com.asimodabas.domain.usecase.get_platforms.GetPlatformsUseCase
+import com.asimodabas.domain.usecase.get_platforms.GetPlatformsUseCaseImpl
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

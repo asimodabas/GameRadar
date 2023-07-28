@@ -2,12 +2,12 @@ package com.asimodabas.presentation.games
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingData
-import com.asimodabas.data.usecase.get_all_games.GetAllGamesPagerUseCase
-import com.asimodabas.data.usecase.get_game_search.GetGameSearchPagerUseCase
-import com.asimodabas.data.usecase.get_game_search.GetGameSearchUseCase
-import com.asimodabas.data.usecase.get_platforms.GetPlatformsUseCase
 import com.asimodabas.domain.common.NetworkCheck
 import com.asimodabas.domain.ui_model.GameUiModel
+import com.asimodabas.domain.usecase.get_all_games.GetAllGamesPagerUseCase
+import com.asimodabas.domain.usecase.get_game_search.GetGameSearchPagerUseCase
+import com.asimodabas.domain.usecase.get_game_search.GetGameSearchUseCase
+import com.asimodabas.domain.usecase.get_platforms.GetPlatformsUseCase
 import com.asimodabas.presentation.firstPlatformUiModel
 import com.asimodabas.presentation.fragment.games.GamesViewModel
 import com.asimodabas.presentation.observedValue

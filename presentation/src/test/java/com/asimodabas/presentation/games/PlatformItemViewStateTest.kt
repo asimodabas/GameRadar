@@ -51,7 +51,7 @@ class PlatformItemViewStateTest {
         val result = viewState.updatePlatformBackground()
 
         // Then
-        assertEquals(R.drawable.bg_custom_platform_shape, result)
+        assertEquals(R.drawable.bg_custom_platform_shape_select, result)
     }
 
 

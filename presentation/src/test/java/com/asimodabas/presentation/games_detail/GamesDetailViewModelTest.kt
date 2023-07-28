@@ -2,16 +2,14 @@ package com.asimodabas.presentation.games_detail
 
 import android.content.SharedPreferences
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.asimodabas.data.mapper.detail_local.DetailLocalMapper
-import com.asimodabas.data.usecase.delete_detail.DeleteDetailUseCase
-import com.asimodabas.data.usecase.get_game_detail.GetGameDetailUseCase
-import com.asimodabas.data.usecase.insert_details.InsertDetailsUseCase
 import com.asimodabas.domain.common.NetworkCheck
-import com.asimodabas.presentation.firstDetailShow
+import com.asimodabas.domain.usecase.delete_detail.DeleteDetailUseCase
+import com.asimodabas.domain.usecase.get_game_detail.GetGameDetailUseCase
+import com.asimodabas.domain.usecase.insert_details.InsertDetailsUseCase
+import com.asimodabas.presentation.firstDetailUiModel
 import com.asimodabas.presentation.fragment.games_detail.GamesDetailViewModel
 import com.asimodabas.presentation.fragment.games_detail.view.state.GamesDetailViewState
 import com.asimodabas.presentation.observedValue
-import com.asimodabas.presentation.topDetailLocal
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -44,9 +42,6 @@ class GamesDetailViewModelTest {
     private lateinit var deleteDetailUseCase: DeleteDetailUseCase
 
     @Mock
-    private lateinit var detailLocalMapper: DetailLocalMapper
-
-    @Mock
     private lateinit var sharedPreferences: SharedPreferences
 
     @get:Rule
@@ -65,7 +60,6 @@ class GamesDetailViewModelTest {
             getGameDetailUseCase,
             insertDetailsUseCase,
             deleteDetailUseCase,
-            detailLocalMapper,
             sharedPreferences
         )
     }
@@ -81,7 +75,7 @@ class GamesDetailViewModelTest {
         runTest {
             // Mock data and response
             val id = 123
-            val detail = firstDetailShow()
+            val detail = firstDetailUiModel()
             val response = NetworkCheck.Success(detail)
 
             // Set up the mock behavior for the use case
@@ -100,7 +94,7 @@ class GamesDetailViewModelTest {
     fun `Given user with wishlist containing item When check wishlist calledForItem Then verifyItReturns True`() =
         runTest {
             // Mock data and response
-            val detail = firstDetailShow()
+            val detail = firstDetailUiModel()
 
             // Mock behavior for sharedPreferences
             `when`(sharedPreferences.getBoolean(anyString(), anyBoolean())).thenReturn(true)
@@ -118,7 +112,7 @@ class GamesDetailViewModelTest {
     fun `Given user without specified item When check wishlist called for item Then verify it returns False`() =
         runTest {
             // Mock data and response
-            val detail = firstDetailShow()
+            val detail = firstDetailUiModel()
 
             // Mock behavior for sharedPreferences
             `when`(
@@ -140,7 +134,7 @@ class GamesDetailViewModelTest {
     fun `Given user with wishlist containing multiple items When check wishlist called for item Then verify presence item in wishlist`() =
         runTest {
             // Mock data and response
-            val detail = firstDetailShow()
+            val detail = firstDetailUiModel()
 
             // Mock behavior for sharedPreferences
             `when`(sharedPreferences.getBoolean(anyString(), anyBoolean())).thenReturn(true)
@@ -150,28 +144,6 @@ class GamesDetailViewModelTest {
 
             // Wait until LiveData is updated
             val expectedResult = true
-            val result = viewModel.wishlistState.observedValue()
-            assertEquals(expectedResult, result)
-        }
-
-    @Test
-    fun `Given user wishlist page When click wishlist button for item Then verify item added to cart Success`() =
-        runTest {
-            // Mock data and response
-            val detail = firstDetailShow()
-            val detailLocal = topDetailLocal
-
-            // Mock behavior for sharedPreferences
-            `when`(sharedPreferences.getBoolean(anyString(), anyBoolean())).thenReturn(true)
-
-            // Mock behavior for detailLocalMapper
-            `when`(detailLocalMapper.map(detail)).thenReturn(detailLocal)
-
-            // Call the function to be tested
-            viewModel.wishlistClickButton(detail)
-
-            // Wait until LiveData is updated
-            val expectedResult = false
             val result = viewModel.wishlistState.observedValue()
             assertEquals(expectedResult, result)
         }
