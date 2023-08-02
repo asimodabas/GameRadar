@@ -8,3 +8,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Trendyol-Interview"
 include ':app'
+include ':presentation'
+include ':domain'
+include ':data'

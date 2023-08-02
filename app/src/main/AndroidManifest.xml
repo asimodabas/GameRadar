@@ -16,7 +16,7 @@
         android:theme="@style/Theme.TrendyolInterview"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.main.MainActivity"
+            android:name=".activity.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

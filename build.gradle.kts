@@ -2,14 +2,19 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri(Sdk.r8Uri)
+        }
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:${BuildTools.gradle}")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.kotlinCompilerVersion}")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${AndroidX.navigation}")
+        // AndroidX
+        classpath(Libraries.androidBuildTools)
+        classpath(Libraries.androidR8Tools)
+        classpath(Libraries.androidGradlePlugin)
+        classpath(Libraries.androidXnavigationSafeArgs)
 
         // Dagger-Hilt
-        classpath("com.google.dagger:hilt-android-gradle-plugin:${Google.daggerHilt}")
+        classpath(Libraries.googlehiltGradlePlugin)
     }
 }
 

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_gray"
-    tools:context=".ui.activity.main.MainActivity">
+    tools:context=".activity.main.MainActivity">
 
     <fragment
         android:id="@+id/fContainerFlow"
