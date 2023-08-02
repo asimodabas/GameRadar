@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="dark_gray">#2C2B2B</color>
+    <color name="gray">#757474</color>
+    <color name="green">#00FF00</color>
+    <color name="light_gray">#353535</color>
+    <color name="red">#D70040</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="yellow">#FFFF00</color>
+    <string name="app_name">Trendyol-Interview</string>
+    <string name="back">Back</string>
+    <string name="descriptions">Descriptions</string>
+    <string name="game_detail">Game Detail</string>
+    <string name="game_name">Game Name</string>
+    <string name="games">Games</string>
+    <string name="genres">Genres</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="informations">Informations</string>
+    <string name="play_time">Play Time</string>
+    <string name="publishers">Publishers</string>
+    <string name="release_date">Release Date</string>
+    <string name="search">Search</string>
+    <string name="visit_reddit">Visit Reddit</string>
+    <string name="visit_website">Visit Website</string>
+    <string name="wishlist">Wishlist</string>
+    <style name="Base.Theme.TrendyolInterview" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.TrendyolInterview" parent="Base.Theme.TrendyolInterview"/>
+    <style name="ThemeOverlay.SearchView" parent="">
+        <item name="android:editTextColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+    </style>
+</resources>

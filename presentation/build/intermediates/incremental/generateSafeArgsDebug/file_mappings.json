@@ -1,0 +1,1 @@
+[{"navFile":"src/main/res/navigation/main_nav.xml","javaFiles":["com.asimodabas.presentation.fragment.games.GamesFragmentDirections","com.asimodabas.presentation.fragment.games_detail.GamesDetailFragmentDirections","com.asimodabas.presentation.fragment.games_detail.GamesDetailFragmentArgs","com.asimodabas.presentation.fragment.wishlist.WishlistFragmentDirections"]}]
