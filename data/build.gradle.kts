@@ -26,7 +26,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions { jvmTarget = Jvm.target }
+    kotlinOptions { 
+        jvmTarget = Jvm.target 
+    }
+    kapt {
+        javacOptions {
+            option("-source", "17")
+            option("-target", "17")
+        }
+    }
     buildFeatures {
         dataBinding = true
         viewBinding = true
