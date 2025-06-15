@@ -3,8 +3,9 @@
 
 **GameRadar** is a modern Android application designed to help users stay up to date with the latest news, trends, and developments in the gaming world. Whether you're interested in upcoming game releases, industry news, or updates from your favorite titles, GameRadar provides a streamlined and user-friendly experience to access this information in one place. The app aggregates reliable sources and presents them through a clean interface, making it easier for gaming enthusiasts to discover and follow the most relevant updates without getting overwhelmed. Built with performance and maintainability in mind, GameRadar leverages modern Android development tools and architectural patterns to ensure a seamless experience across a wide range of devices.
 
-![untitled (online-video-cutter com) (1)](https://github.com/user-attachments/assets/d0cf19fa-ae6e-40e4-8677-4e53b9a38380)
-
+| Games | Game Detail | Wishlist |
+| ------- | -------------------- | -------------------- |
+|<img src="https://github.com/user-attachments/assets/ce17890d-a5b3-43f6-beb0-1473c1d8d98f"/>|<img src="https://github.com/user-attachments/assets/774edaff-e752-4cfe-91d5-d37d26157d39"/>|<img src="https://github.com/user-attachments/assets/208f4eee-06e8-4421-8918-7fba60e9f3b1"/>|
 
 ## Architecture
 
